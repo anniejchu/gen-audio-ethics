@@ -1,1 +1,1 @@
-git+https://github.com/johnwmillr/LyricsGenius.git
+lyricsgenius==3.0.1

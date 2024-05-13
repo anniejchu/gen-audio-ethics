@@ -1,6 +1,5 @@
 import os
 from tqdm import tqdm
-import pickle
 from lyricsgenius import Genius #uses BeautifulSoup, should think about use
 import pprint as j
 from ShazamAPI import Shazam

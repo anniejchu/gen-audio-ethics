@@ -303,7 +303,7 @@ if __name__ == '__main__':
     analyzer=Transcription_Analyzer()
     
     analyzer.get_audio_info_youtube("EDwb9jOVRtU", options.save_loc, 120, 130, [], None)
-    return
+    exit()
     
     with open(options.youtube_ids, newline='') as f:
         reader = csv.reader(f)

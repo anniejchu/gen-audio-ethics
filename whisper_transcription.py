@@ -6,7 +6,7 @@ import pickle
 class Whisper_Transcriber:
     
     def __init__(self):
-        self.model = whisper.load_model("tiny")
+        self.model = whisper.load_model("large")
         
     def transcribe(self, audio_path):
         result = self.model.transcribe(audio_path)

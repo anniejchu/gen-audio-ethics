@@ -179,7 +179,7 @@ class Transcription_Analyzer:
             #                 transcript=self.get_transcript_from_url(transcript_link['url'])
             # If this fails use whisper
             if transcript is None:
-                result=whisper_transcriber.transcribe(os.path.join(save_dir, file_name))#self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name))#whisper_transcriber.transcribe(os.path.join(save_dir, file_name))
+                result=whisper_pipe.transcribe(os.path.join(save_dir, file_name))#self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name))#whisper_transcriber.transcribe(os.path.join(save_dir, file_name))
                 transcript=result['text']
                 langauge=result['langauge']
                 
@@ -299,10 +299,10 @@ if __name__ == '__main__':
     (options, args) = parser.parse_args()
     print(options)
     
-    #whisper_transcriber=Whisper_Transcriber()
+    whisper_transcriber=Whisper_Transcriber()
     analyzer=Transcription_Analyzer()
     
-    analyzer.get_audio_info_youtube("EDwb9jOVRtU", options.save_loc, 120, 130, [], None)
+    analyzer.get_audio_info_youtube("EDwb9jOVRtU", options.save_loc, 120, 130, [], whisper_transcriber)
     exit()
     
     with open(options.youtube_ids, newline='') as f:

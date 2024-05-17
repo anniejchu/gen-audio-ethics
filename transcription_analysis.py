@@ -129,13 +129,13 @@ class Transcription_Analyzer:
                 'paths': {'home': save_dir},
             }
             with YoutubeDL(ydl_opts) as ydl:
-        
-                try:
-                    error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
-                except yt_dlp.utils.DownloadError:
-                    print(f'video unavailable! {youtube_id}')
-                    pickle.dump('video unavailable!', open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
-                    return
+                error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
+                # try:
+                #     error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
+                # except yt_dlp.utils.DownloadError:
+                #     print(f'video unavailable! {youtube_id}')
+                #     pickle.dump('video unavailable!', open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
+                #     return
                     
                 info = ydl.extract_info(f'https://www.youtube.com/watch?v={youtube_id}', download=False)
             
@@ -179,16 +179,17 @@ class Transcription_Analyzer:
             #                 transcript=self.get_transcript_from_url(transcript_link['url'])
             # If this fails use whisper
             if transcript is None:
-                result=self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name))#whisper_transcriber.transcribe(os.path.join(save_dir, file_name))
+                result=whisper_transcriber.transcribe(os.path.join(save_dir, file_name))#self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name))#whisper_transcriber.transcribe(os.path.join(save_dir, file_name))
                 transcript=result['text']
-                langauge=result['language']
+                langauge=result['langauge']
                 
             # If audio has music, try to get audio and artist info
             music_info=None
             music_tags=[feat for feat in audio_tags if feat[0] in self.music_codes]
+            print('music_tags', music_tags)
             if len(music_tags)>0:
                 music_info=self.get_audio_info_unk(os.path.join(save_dir, file_name), transcript)
-            
+            print('music_info', music_info)
             #langauge=whisper_transcriber.get_language(os.path.join(save_dir, file_name))
                 
             
@@ -291,15 +292,18 @@ class Transcription_Analyzer:
         
 if __name__ == '__main__':
     parser = OptionParser()
-    parser.add_option("--save_loc", dest="save_loc", default='/media/willie/1caf5422-4135-4f2c-9619-c44041b51146/audio_data/audioset/audioset_downloads')
+    parser.add_option("--save_loc", dest="save_loc", default='/Users/williamagnew/eclipse-workspace/gen-audio-ethics/')
     parser.add_option("--youtube_ids", dest="youtube_ids", default='/media/willie/1caf5422-4135-4f2c-9619-c44041b51146/audio_data/audioset/unbalanced_train_segments.csv')
     parser.add_option("--num_processes", type="int", dest="num_processes", default=24)
     
     (options, args) = parser.parse_args()
     print(options)
     
-    whisper_transcriber=Whisper_Transcriber()
+    #whisper_transcriber=Whisper_Transcriber()
     analyzer=Transcription_Analyzer()
+    
+    analyzer.get_audio_info_youtube("EDwb9jOVRtU", options.save_loc, 120, 130, [], None)
+    return
     
     with open(options.youtube_ids, newline='') as f:
         reader = csv.reader(f)
@@ -335,7 +339,7 @@ if __name__ == '__main__':
                     result=whisper_transcriber.transcribe(audio_file)
                     pipe.send(result)
             time.sleep(0.1)
-    u=0
+
     # Single threaded
     # for ind in tqdm(range(len(yt_ids))):
     #     analyzer.get_audio_info_youtube(yt_ids[ind][0], options.save_loc, int(float(yt_ids[ind][1].strip())), int(float(yt_ids[ind][2].strip())), yt_ids[ind][3:])

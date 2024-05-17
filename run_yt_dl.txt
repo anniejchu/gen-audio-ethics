@@ -1,0 +1,20 @@
+#!/bin/bash
+#SBATCH --job-name=unit-test-networks
+#SBATCH --partition=ckpt
+#SBATCH --account=cse
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=256G
+#SBATCH --gres=gpu:0
+#SBATCH --time=10:00:00
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=<>
+
+source ~/.bashrc
+conda activate <env name>
+cd <project dir>
+echo "-----------"
+echo $1
+python transcription_analysis.py --num_processes=512 --save_loc=<> --youtube_ids=<>.csv
+
+

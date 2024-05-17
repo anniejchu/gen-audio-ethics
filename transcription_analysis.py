@@ -179,9 +179,9 @@ class Transcription_Analyzer:
             #                 transcript=self.get_transcript_from_url(transcript_link['url'])
             # If this fails use whisper
             if transcript is None:
-                result=whisper_pipe.transcribe(os.path.join(save_dir, file_name))#self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name))#whisper_transcriber.transcribe(os.path.join(save_dir, file_name))
-                transcript=result['text']
-                langauge=result['langauge']
+                #result=whisper_pipe.transcribe(os.path.join(save_dir, file_name))#self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name))#whisper_transcriber.transcribe(os.path.join(save_dir, file_name))
+                transcript="Oh, can't you see I made, I made a mistake Please just look me in my face Tell me everything's okay Cause I got this"#result['text']
+                langauge="en"#result['langauge']
                 
             # If audio has music, try to get audio and artist info
             music_info=None
@@ -214,7 +214,11 @@ class Transcription_Analyzer:
         return self.audio_tagger.tag_audio(audio)
     
     def get_audio_info_unk(self, audio_file, transcript):
-        hits=self.search_song_by_lyric(transcript, return_lyrics=False)
+        #drop first word which might be clipped to increase search accuracy
+        search_lyrics=transcript
+        if len(transcript.split(" "))>1:
+            search_lyrics=transcript[len(transcript.split(" ")[0]):]
+        hits=self.search_song_by_lyric(search_lyrics, return_lyrics=False)
         # Getting the ID of the top hit (single song)
         
         top_hit_id=None
@@ -299,11 +303,11 @@ if __name__ == '__main__':
     (options, args) = parser.parse_args()
     print(options)
     
-    whisper_transcriber=Whisper_Transcriber()
+    #whisper_transcriber=Whisper_Transcriber()
     analyzer=Transcription_Analyzer()
-    
-    analyzer.get_audio_info_youtube("EDwb9jOVRtU", options.save_loc, 120, 130, [], whisper_transcriber)
-    exit()
+    analyzer.get_audio_info_unk("/Users/williamagnew/eclipse-workspace/gen-audio-ethics/Flume - Never Be Like You feat. Kai [Ly7uj0JwgKg].m4a", "Oh, can't you see I made, I made a mistake Please just look me in my face Tell me everything's okay Cause I got this")
+    analyzer.get_audio_info_youtube("Ly7uj0JwgKg", options.save_loc, 120, 130, [], None)
+    # exit()
     
     with open(options.youtube_ids, newline='') as f:
         reader = csv.reader(f)

@@ -20,6 +20,7 @@ import yt_dlp
 import multiprocessing as mp
 from optparse import OptionParser
 import time
+from pydub import AudioSegment
 # import api_key #importing api_key.py file that holds my personal client access token
 #whisper_transcriber=None#Whisper_Transcriber()
 from multiprocessing import Process, Manager,Queue, Pipe
@@ -144,10 +145,13 @@ class Transcription_Analyzer:
                 if f'[{youtube_id}].m4a' in file_name:
                     break
             
-            waveform, sample_rate = torchaudio.load(os.path.join(save_dir, file_name))
+            audio = AudioSegment.from_file(os.path.join(save_dir, file_name))
+            audio.export(os.path.join(save_dir, file_name[:-3]+'wav'), format='wav')
+            
+            waveform, sample_rate = torchaudio.load(os.path.join(save_dir, file_name[:-3]+'wav'))
             # cut audio to 10s sample length
             waveform=waveform[:, start_time*sample_rate:stop_time*sample_rate]
-            torchaudio.save(os.path.join(save_dir, file_name), waveform, sample_rate)
+            torchaudio.save(os.path.join(save_dir, file_name[:-3]+'wav'), waveform, sample_rate)
             wada_snr_measure=float('nan')
             if waveform.shape[1]>0:
                 wada_snr_measure=wada_snr(waveform)
@@ -188,7 +192,7 @@ class Transcription_Analyzer:
             music_tags=[feat for feat in audio_tags if feat[0] in self.music_codes]
             print('music_tags', music_tags)
             if len(music_tags)>0:
-                music_info=self.get_audio_info_unk(os.path.join(save_dir, file_name), transcript)
+                music_info=self.get_audio_info_unk(os.path.join(save_dir, file_name[:-3]+'wav'), transcript)
             print('music_info', music_info)
             #langauge=whisper_transcriber.get_language(os.path.join(save_dir, file_name))
                 
@@ -305,7 +309,7 @@ if __name__ == '__main__':
     
     #whisper_transcriber=Whisper_Transcriber()
     analyzer=Transcription_Analyzer()
-    analyzer.get_audio_info_unk("/Users/williamagnew/eclipse-workspace/gen-audio-ethics/Flume - Never Be Like You feat. Kai [Ly7uj0JwgKg].m4a", "Oh, can't you see I made, I made a mistake Please just look me in my face Tell me everything's okay Cause I got this")
+    #analyzer.get_audio_info_unk("/Users/williamagnew/eclipse-workspace/gen-audio-ethics/Flume - Never Be Like You feat. Kai [Ly7uj0JwgKg].m4a", "Oh, can't you see I made, I made a mistake Please just look me in my face Tell me everything's okay Cause I got this")
     analyzer.get_audio_info_youtube("Ly7uj0JwgKg", options.save_loc, 120, 130, [], None)
     # exit()
     

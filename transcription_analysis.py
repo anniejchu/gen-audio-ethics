@@ -172,8 +172,9 @@ class Transcription_Analyzer:
                         
                     info = ydl.extract_info(f'https://www.youtube.com/watch?v={youtube_id}', download=False)
                     output.seek(0)
-                    # temp_data, temp_sr = sf.read( f )
-                    waveform=mp3_read_f32(output.read())
+                    temp_data, temp_sr = sf.read(output.read(), channels=2, samplerate=44100,
+                           subtype='FLOAT', format='RAW')
+                    #waveform=mp3_read_f32(output.read())
                     #waveform, sample_rate = torchaudio.load(f)
                 
             # for file_name in os.listdir(save_dir):

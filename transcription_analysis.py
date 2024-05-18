@@ -364,13 +364,13 @@ if __name__ == '__main__':
     # analyzer.get_audio_info_youtube("Ly7uj0JwgKg", options.save_loc, 120, 130, [], None)
     # exit()
     
-    with open(options.youtube_ids, newline='') as f:
-        reader = csv.reader(f)
-        yt_ids = list(reader)
-    yt_ids=yt_ids[3:]
-    random.shuffle(yt_ids)
-    for yt_id in yt_ids:
-        analyzer.get_audio_info_youtube(yt_id[0], options.save_loc, int(float(yt_id[1].strip())), int(float(yt_id[2].strip())), yt_id[3:], None)
+    # with open(options.youtube_ids, newline='') as f:
+    #     reader = csv.reader(f)
+    #     yt_ids = list(reader)
+    # yt_ids=yt_ids[3:]
+    # random.shuffle(yt_ids)
+    # for yt_id in yt_ids:
+    #     analyzer.get_audio_info_youtube(yt_id[0], options.save_loc, int(float(yt_id[1].strip())), int(float(yt_id[2].strip())), yt_id[3:], None)
     
     # Multithreaded
     all_parallel_runs=[]
@@ -388,7 +388,7 @@ if __name__ == '__main__':
             run=pool.apply_async(mult_analyze, args=(analyzer, q,(parent_queue, child_queue)))
             all_parallel_runs.append(run)
         
-        while True:
+        while not q.empty():
             print(q.qsize())
             time.sleep(1)
             

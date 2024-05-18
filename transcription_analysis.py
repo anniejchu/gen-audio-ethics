@@ -193,7 +193,7 @@ class Transcription_Analyzer:
             # audio.export(os.path.join(save_dir, file_name[:-3]+'wav'), format='wav')
             #waveform, sample_rate = torchaudio.load()#os.path.join(save_dir, file_name[:-3]+'wav'))
             # cut audio to 10s sample length
-            #waveform=waveform[:, start_time*sample_rate:stop_time*sample_rate]
+            waveform=waveform[:, start_time*sample_rate:stop_time*sample_rate]
             torchaudio.save(os.path.join(save_dir, file_name[:-3]+'wav'), waveform, sample_rate)
             wada_snr_measure=float('nan')
             if waveform.shape[1]>0:
@@ -241,7 +241,7 @@ class Transcription_Analyzer:
                 
             
             pickle.dump({'yt_info': info, 'wada_snr': wada_snr_measure, 'audio_tags': audio_tags, 'transcript': transcript, 'langauge': langauge, 'music_info': music_info}, open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
-            output.close()
+            os.remove(os.path.join(save_dir, file_name[:-3]+'wav')
     
     def whisper_transcribe(self, whisper_pipe, text_path):
         whisper_pipe[0].put(text_path)

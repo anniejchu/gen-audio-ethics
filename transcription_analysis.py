@@ -29,6 +29,7 @@ from contextlib import redirect_stdout
 from pathlib import Path
 import io
 import tempfile
+import codecs
 
 def mult_analyze(analyzer,q,child_conn):
     # print('a')
@@ -135,9 +136,10 @@ class Transcription_Analyzer:
             }
             
             
-            output = io.StringIO()
-            #temp = tempfile.SpooledTemporaryFile(max_size=10e12)
-            with redirect_stdout(output), YoutubeDL(ydl_opts) as ydl:
+            output = io.BytesIO()
+            StreamWriter = codecs.getwriter('utf-8')  # here you pass the encoding
+            wrapper_file = StreamWriter(output)
+            with redirect_stdout(wrapper_file), YoutubeDL(ydl_opts) as ydl:
                 error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
                 # try:
                 #     error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])

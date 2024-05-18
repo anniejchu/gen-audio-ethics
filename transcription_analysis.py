@@ -380,7 +380,7 @@ if __name__ == '__main__':
             run=pool.apply_async(mult_analyze, args=(analyzer, q,(parent_queue, child_queue)))
             all_parallel_runs.append(run)
         
-        while true:
+        while True:
             print(q.qsize())
             
         all_done=False

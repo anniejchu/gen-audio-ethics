@@ -1,4 +1,5 @@
 import os
+import array
 from tqdm import tqdm
 from lyricsgenius import Genius #uses BeautifulSoup, should think about use
 import pprint as j

@@ -161,13 +161,13 @@ class Transcription_Analyzer:
             # with mem_fs.open('test.wav', 'rw') as f:
             s_time=time.time()
             with YoutubeDL(ydl_opts) as ydl:
-                error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
-                # try:
-                #     error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
-                # except yt_dlp.utils.DownloadError:
-                #     print(f'video unavailable! {youtube_id}')
-                #     pickle.dump('video unavailable!', open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
-                #     return
+                # error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
+                try:
+                    error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
+                except yt_dlp.utils.DownloadError:
+                    print(f'video unavailable! {youtube_id}')
+                    pickle.dump('video unavailable!', open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
+                    return
                     
                 info = ydl.extract_info(f'https://www.youtube.com/watch?v={youtube_id}', download=False)
                 # temp_data, temp_sr = sf.read(output.read(), channels=2, samplerate=44100,

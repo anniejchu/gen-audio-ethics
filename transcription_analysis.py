@@ -172,7 +172,8 @@ class Transcription_Analyzer:
                         
                     info = ydl.extract_info(f'https://www.youtube.com/watch?v={youtube_id}', download=False)
                     f.seek(0)
-                    temp_data, temp_sr = sf.read( f )
+                    # temp_data, temp_sr = sf.read( f )
+                    waveform, sample_rate = torchaudio.load(f)
                 
             # for file_name in os.listdir(save_dir):
             #     if f'[{youtube_id}].m4a' in file_name:

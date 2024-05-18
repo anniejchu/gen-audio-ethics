@@ -180,8 +180,8 @@ class Transcription_Analyzer:
             # audio = AudioSegment.from_file(os.path.join(save_dir, file_name))
             # audio.export(os.path.join(save_dir, file_name[:-3]+'wav'), format='wav')
             
-            #waveform=torch.FloatTensor(mp3_read_f32(output.getvalue()))
-            waveform, sample_rate = torchaudio.load(mem_fs.open('test.txt', 'r'))#os.path.join(save_dir, file_name[:-3]+'wav'))
+            waveform=torch.FloatTensor(mem_fs.open('test.txt', 'r').read())
+            #waveform, sample_rate = torchaudio.load()#os.path.join(save_dir, file_name[:-3]+'wav'))
             # cut audio to 10s sample length
             #waveform=waveform[:, start_time*sample_rate:stop_time*sample_rate]
             torchaudio.save(os.path.join(save_dir, file_name[:-3]+'wav'), waveform, sample_rate)

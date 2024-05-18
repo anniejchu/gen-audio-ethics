@@ -370,7 +370,7 @@ if __name__ == '__main__':
     yt_ids=yt_ids[3:]
     random.shuffle(yt_ids)
     for yt_id in yt_ids:
-        analyzer.get_audio_info_youtube(yt_ids[ind][0], options.save_loc, int(float(yt_ids[ind][1].strip())), int(float(yt_ids[ind][2].strip())), yt_ids[ind][3:], None)
+        analyzer.get_audio_info_youtube(yt_id[0], options.save_loc, int(float(yt_id[1].strip())), int(float(yt_id[2].strip())), yt_id[3:], None)
     
     # Multithreaded
     all_parallel_runs=[]

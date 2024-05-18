@@ -146,7 +146,7 @@ class Transcription_Analyzer:
     def get_audio_info_youtube(self, youtube_id, save_dir, start_time, stop_time, features, whisper_pipe):
         if not os.path.exists(os.path.join(save_dir, f'{youtube_id}_info.lz4')):
             ydl_opts = {
-                'format': 'm4a/bestaudio/best',
+                'format': 'bestaudio/best',
                 # ℹ️ See help(yt_dlp.postprocessor) for a list of available Postprocessors and their arguments
                 'postprocessors': [{  # Extract audio using ffmpeg
                     'key': 'FFmpegExtractAudio',
@@ -156,7 +156,7 @@ class Transcription_Analyzer:
             }
             
             
-            output = tempfile.SpooledTemporaryFile(max_size=1e12)#io.BytesIO()
+            output = io.BytesIO()#tempfile.SpooledTemporaryFile(max_size=1e12)#
             # StreamWriter = codecs.getwriter('utf-8')  # here you pass the encoding
             # wrapper_file = StreamWriter(output)
             with redirect_stdout(output), YoutubeDL(ydl_opts) as ydl:
@@ -178,7 +178,7 @@ class Transcription_Analyzer:
             # audio = AudioSegment.from_file(os.path.join(save_dir, file_name))
             # audio.export(os.path.join(save_dir, file_name[:-3]+'wav'), format='wav')
             
-            waveform=torch.FloatTensor(mp3_read_f32(output.read()))
+            waveform=torch.FloatTensor(mp3_read_f32(output.getvalue()))
             #waveform, sample_rate = torchaudio.load(output)#os.path.join(save_dir, file_name[:-3]+'wav'))
             # cut audio to 10s sample length
             #waveform=waveform[:, start_time*sample_rate:stop_time*sample_rate]

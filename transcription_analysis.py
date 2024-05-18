@@ -178,7 +178,7 @@ class Transcription_Analyzer:
                     #waveform=mp3_read_f32(output.read())
                     #waveform, sample_rate = torchaudio.load(f)
             for file_name in os.listdir(save_dir):
-                if f'[{youtube_id}].m4a' in file_name:
+                if f'[{youtube_id}].wav' in file_name:
                     break
             # audio = AudioSegment.from_file(os.path.join(save_dir, file_name))
             # audio.export(os.path.join(save_dir, file_name[:-3]+'wav'), format='wav')

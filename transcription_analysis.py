@@ -184,7 +184,7 @@ class Transcription_Analyzer:
             # audio.export(os.path.join(save_dir, file_name[:-3]+'wav'), format='wav')
             waveform, sample_rate = torchaudio.load(os.path.join(save_dir, file_name[:-3]+'wav'))#
             e_time=time.time()
-            print('time', e_time-s_time)   
+            print('time a', e_time-s_time)   
             # for file_name in os.listdir(save_dir):
             #     if f'[{youtube_id}].m4a' in file_name:
             #         break
@@ -193,11 +193,15 @@ class Transcription_Analyzer:
             # audio.export(os.path.join(save_dir, file_name[:-3]+'wav'), format='wav')
             #waveform, sample_rate = torchaudio.load()#os.path.join(save_dir, file_name[:-3]+'wav'))
             # cut audio to 10s sample length
+            
+            s_time=time.time()
             waveform=waveform[:, start_time*sample_rate:stop_time*sample_rate]
             torchaudio.save(os.path.join(save_dir, file_name[:-3]+'wav'), waveform, sample_rate)
             wada_snr_measure=float('nan')
             if waveform.shape[1]>0:
                 wada_snr_measure=wada_snr(waveform)
+            e_time=time.time()
+            print('time b', e_time-s_time)   
             # audio_tags=self.get_sound_tags(waveform.numpy())
             audio_tags=[]
             for feature in features:
@@ -237,13 +241,16 @@ class Transcription_Analyzer:
             music_tags=[feat for feat in audio_tags if feat[0] in self.music_codes]
             #print('music_tags', music_tags)
             if len(music_tags)>0:
+                print('d')
                 music_info=self.get_audio_info_unk(temp.name, transcript)
             #print('music_info', music_info)
             #langauge=whisper_transcriber.get_language(os.path.join(save_dir, file_name))
                 
-            
+            print('e')
             pickle.dump({'yt_info': info, 'wada_snr': wada_snr_measure, 'audio_tags': audio_tags, 'transcript': transcript, 'langauge': langauge, 'music_info': music_info}, open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
+            print('f')
             os.remove(os.path.join(save_dir, file_name[:-3]+'wav'))
+            print('g')
     
     def whisper_transcribe(self, whisper_pipe, text_path):
         whisper_pipe[0].put(text_path)

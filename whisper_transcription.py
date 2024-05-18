@@ -7,6 +7,7 @@ class Whisper_Transcriber:
     
     def __init__(self):
         self.model = whisper.load_model("large")
+        print(f"loaded whisper on {self.model.device}")
         
     def transcribe(self, audio_path):
         result = self.model.transcribe(audio_path)

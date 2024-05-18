@@ -157,21 +157,20 @@ class Transcription_Analyzer:
             }
             
             mem_fs = MemoryFS()
-            with mem_fs.open('test.txt', 'w') as audio_file:
-            # output = io.BytesIO()#tempfile.SpooledTemporaryFile(max_size=1e12)#
-            # StreamWriter = codecs.getwriter('utf-8')  # here you pass the encoding
-            # wrapper_file = StreamWriter(output)
-                with redirect_stdout(audio_file), YoutubeDL(ydl_opts) as ydl:
-                    error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
-                    # try:
-                    #     error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
-                    # except yt_dlp.utils.DownloadError:
-                    #     print(f'video unavailable! {youtube_id}')
-                    #     pickle.dump('video unavailable!', open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
-                    #     return
-                        
-                    info = ydl.extract_info(f'https://www.youtube.com/watch?v={youtube_id}', download=False)
-                
+            output = io.BytesIO()#tempfile.SpooledTemporaryFile(max_size=1e12)#
+            StreamWriter = codecs.getwriter('utf-8')  # here you pass the encoding
+            wrapper_file = StreamWriter(output)
+            with redirect_stdout(wrapper_file), YoutubeDL(ydl_opts) as ydl:
+                error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
+                # try:
+                #     error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
+                # except yt_dlp.utils.DownloadError:
+                #     print(f'video unavailable! {youtube_id}')
+                #     pickle.dump('video unavailable!', open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
+                #     return
+                    
+                info = ydl.extract_info(f'https://www.youtube.com/watch?v={youtube_id}', download=False)
+            
                 
             # for file_name in os.listdir(save_dir):
             #     if f'[{youtube_id}].m4a' in file_name:
@@ -179,8 +178,10 @@ class Transcription_Analyzer:
             
             # audio = AudioSegment.from_file(os.path.join(save_dir, file_name))
             # audio.export(os.path.join(save_dir, file_name[:-3]+'wav'), format='wav')
-            
-            waveform=torch.FloatTensor(mem_fs.open('test.txt', 'r').read())
+            output.name="test.wav"
+            temp_data, temp_sr = sf.read( output )
+            print('temp_data', temp_data)
+            waveform=torch.FloatTensor(temp_data)
             #waveform, sample_rate = torchaudio.load()#os.path.join(save_dir, file_name[:-3]+'wav'))
             # cut audio to 10s sample length
             #waveform=waveform[:, start_time*sample_rate:stop_time*sample_rate]

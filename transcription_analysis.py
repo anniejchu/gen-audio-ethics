@@ -239,7 +239,7 @@ class Transcription_Analyzer:
             #print('music_tags', music_tags)
             if len(music_tags)>0:
                 print('d')
-                music_info=self.get_audio_info_unk(temp.name, transcript)
+                music_info=self.get_audio_info_unk(os.path.join(save_dir, file_name[:-3]+'wav'), transcript)
             #print('music_info', music_info)
             #langauge=whisper_transcriber.get_language(os.path.join(save_dir, file_name))
                 

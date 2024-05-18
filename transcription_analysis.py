@@ -268,12 +268,14 @@ class Transcription_Analyzer:
     
     def get_audio_info_unk(self, audio_file, transcript):
         #drop first word which might be clipped to increase search accuracy
+        print('i')
         search_lyrics=transcript
         if len(transcript.split(" "))>1:
             search_lyrics=transcript[len(transcript.split(" ")[0]):]
+        print('j')
         hits=self.search_song_by_lyric(search_lyrics, return_lyrics=False)
         # Getting the ID of the top hit (single song)
-        
+        print('k')
         top_hit_id=None
         # If match is exact and unique
         if ((len(hits)>0 and transcript.lower() in hits[0]['lyric_match'].lower().replace("\n", " ")) 
@@ -292,7 +294,7 @@ class Transcription_Analyzer:
                         top_hit_id = hits.id
                 break
         if not top_hit_id is None:    
-            
+            print('l')
             # d=hits[1]['lyric_match'].lower().replace("\n", " ")
             # a=transcript.lower() in hits[1]['lyric_match'].lower().replace("\n", " ")
             # b=not transcript.lower() in hits[1]['lyric_match'].lower().replace("\n", " ")

@@ -25,6 +25,10 @@ from pydub import AudioSegment
 #whisper_transcriber=None#Whisper_Transcriber()
 from multiprocessing import Process, Manager,Queue, Pipe
 import queue
+from contextlib import redirect_stdout
+from pathlib import Path
+import io
+import tempfile
 
 def mult_analyze(analyzer,q,child_conn):
     # print('a')
@@ -125,33 +129,37 @@ class Transcription_Analyzer:
                 # ℹ️ See help(yt_dlp.postprocessor) for a list of available Postprocessors and their arguments
                 'postprocessors': [{  # Extract audio using ffmpeg
                     'key': 'FFmpegExtractAudio',
-                    'preferredcodec': 'm4a',
+                    'preferredcodec': 'wav',
                 }],
                 'paths': {'home': save_dir},
             }
-            with YoutubeDL(ydl_opts) as ydl:
-                #error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
-                try:
-                    error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
-                except yt_dlp.utils.DownloadError:
-                    print(f'video unavailable! {youtube_id}')
-                    pickle.dump('video unavailable!', open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
-                    return
+            
+            
+            output = io.StringIO()
+            #temp = tempfile.SpooledTemporaryFile(max_size=10e12)
+            with redirect_stdout(output), YoutubeDL(ydl_opts) as ydl:
+                error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
+                # try:
+                #     error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
+                # except yt_dlp.utils.DownloadError:
+                #     print(f'video unavailable! {youtube_id}')
+                #     pickle.dump('video unavailable!', open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
+                #     return
                     
                 info = ydl.extract_info(f'https://www.youtube.com/watch?v={youtube_id}', download=False)
             
             
-            for file_name in os.listdir(save_dir):
-                if f'[{youtube_id}].m4a' in file_name:
-                    break
+            # for file_name in os.listdir(save_dir):
+            #     if f'[{youtube_id}].m4a' in file_name:
+            #         break
             
-            audio = AudioSegment.from_file(os.path.join(save_dir, file_name))
-            audio.export(os.path.join(save_dir, file_name[:-3]+'wav'), format='wav')
+            # audio = AudioSegment.from_file(os.path.join(save_dir, file_name))
+            # audio.export(os.path.join(save_dir, file_name[:-3]+'wav'), format='wav')
             
-            waveform, sample_rate = torchaudio.load(os.path.join(save_dir, file_name[:-3]+'wav'))
+            waveform, sample_rate = torchaudio.load(output)#os.path.join(save_dir, file_name[:-3]+'wav'))
             # cut audio to 10s sample length
             waveform=waveform[:, start_time*sample_rate:stop_time*sample_rate]
-            torchaudio.save(os.path.join(save_dir, file_name[:-3]+'wav'), waveform, sample_rate)
+            #torchaudio.save(os.path.join(save_dir, file_name[:-3]+'wav'), waveform, sample_rate)
             wada_snr_measure=float('nan')
             if waveform.shape[1]>0:
                 wada_snr_measure=wada_snr(waveform)
@@ -183,7 +191,7 @@ class Transcription_Analyzer:
             #                 transcript=self.get_transcript_from_url(transcript_link['url'])
             # If this fails use whisper
             if transcript is None:
-                result=self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name[:-3]+'wav'))#whisper_transcriber.transcribe(os.path.join(save_dir, file_name[:-3]+'wav'))#
+                result=self.whisper_transcribe(whisper_pipe, output)#whisper_transcriber.transcribe(os.path.join(save_dir, file_name[:-3]+'wav'))#
                 transcript=result['text']
                 langauge=result['language']
                 
@@ -192,14 +200,13 @@ class Transcription_Analyzer:
             music_tags=[feat for feat in audio_tags if feat[0] in self.music_codes]
             #print('music_tags', music_tags)
             if len(music_tags)>0:
-                music_info=self.get_audio_info_unk(os.path.join(save_dir, file_name[:-3]+'wav'), transcript)
+                music_info=self.get_audio_info_unk(temp.name, transcript)
             #print('music_info', music_info)
             #langauge=whisper_transcriber.get_language(os.path.join(save_dir, file_name))
                 
             
             pickle.dump({'yt_info': info, 'wada_snr': wada_snr_measure, 'audio_tags': audio_tags, 'transcript': transcript, 'langauge': langauge, 'music_info': music_info}, open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
-            os.remove(os.path.join(save_dir, file_name))
-            os.remove(os.path.join(save_dir, file_name[:-3]+'wav'))
+            output.close()
     
     def whisper_transcribe(self, whisper_pipe, text_path):
         whisper_pipe[0].put(text_path)
@@ -308,10 +315,10 @@ if __name__ == '__main__':
     (options, args) = parser.parse_args()
     print(options)
     
-    whisper_transcriber=Whisper_Transcriber()
+    #whisper_transcriber=Whisper_Transcriber()
     analyzer=Transcription_Analyzer()
     #analyzer.get_audio_info_unk("/Users/williamagnew/eclipse-workspace/gen-audio-ethics/Flume - Never Be Like You feat. Kai [Ly7uj0JwgKg].m4a", "Oh, can't you see I made, I made a mistake Please just look me in my face Tell me everything's okay Cause I got this")
-    # analyzer.get_audio_info_youtube("Ly7uj0JwgKg", options.save_loc, 120, 130, [], whisper_transcriber)
+    analyzer.get_audio_info_youtube("Ly7uj0JwgKg", options.save_loc, 120, 130, [], None)
     # exit()
     
     with open(options.youtube_ids, newline='') as f:

@@ -35,6 +35,7 @@ from miniaudio import DecodeError, ffi, lib
 import resampy
 import soundfile as sf
 from fs.memoryfs import MemoryFS
+import time
 
 def mp3_read_f32(data: bytes) -> array:
     '''Reads and decodes the whole mp3 audio data. Resulting sample format is 32 bits float.'''
@@ -156,36 +157,41 @@ class Transcription_Analyzer:
                 'paths': {'home': save_dir},
             }
             
-            mem_fs = MemoryFS()
-            output = io.BytesIO()#tempfile.SpooledTemporaryFile(max_size=1e12)#
-            StreamWriter = codecs.getwriter('utf-8')  # here you pass the encoding
-            wrapper_file = StreamWriter(output)
-            with mem_fs.open('test.wav', 'rw') as f:
-                with redirect_stdout(wrapper_file), YoutubeDL(ydl_opts) as ydl:
-                    error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
-                    # try:
-                    #     error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
-                    # except yt_dlp.utils.DownloadError:
-                    #     print(f'video unavailable! {youtube_id}')
-                    #     pickle.dump('video unavailable!', open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
-                    #     return
-                        
-                    info = ydl.extract_info(f'https://www.youtube.com/watch?v={youtube_id}', download=False)
-                    output.seek(0)
-                    temp_data, temp_sr = sf.read(output.read(), channels=2, samplerate=44100,
-                           subtype='FLOAT', format='RAW')
+            # mem_fs = MemoryFS()
+            # output = io.BytesIO()#tempfile.SpooledTemporaryFile(max_size=1e12)#
+            # StreamWriter = codecs.getwriter('utf-8')  # here you pass the encoding
+            # wrapper_file = StreamWriter(output)
+            # with mem_fs.open('test.wav', 'rw') as f:
+            s_time=time.time()
+            with YoutubeDL(ydl_opts) as ydl:
+                error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
+                # try:
+                #     error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
+                # except yt_dlp.utils.DownloadError:
+                #     print(f'video unavailable! {youtube_id}')
+                #     pickle.dump('video unavailable!', open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
+                #     return
+                    
+                info = ydl.extract_info(f'https://www.youtube.com/watch?v={youtube_id}', download=False)
+                output.seek(0)
+                # temp_data, temp_sr = sf.read(output.read(), channels=2, samplerate=44100,
+                #        subtype='FLOAT', format='RAW')
                     #waveform=mp3_read_f32(output.read())
                     #waveform, sample_rate = torchaudio.load(f)
-                
+            for file_name in os.listdir(save_dir):
+                if f'[{youtube_id}].m4a' in file_name:
+                    break
+            audio = AudioSegment.from_file(os.path.join(save_dir, file_name))
+            audio.export(os.path.join(save_dir, file_name[:-3]+'wav'), format='wav')
+            waveform, sample_rate = torchaudio.load()#os.path.join(save_dir, file_name[:-3]+'wav'))
+            e_time=time.time()
+            print('time', e_time-s_time)   
             # for file_name in os.listdir(save_dir):
             #     if f'[{youtube_id}].m4a' in file_name:
             #         break
             
             # audio = AudioSegment.from_file(os.path.join(save_dir, file_name))
             # audio.export(os.path.join(save_dir, file_name[:-3]+'wav'), format='wav')
-            
-            print('temp_data', temp_data)
-            waveform=torch.FloatTensor(temp_data)
             #waveform, sample_rate = torchaudio.load()#os.path.join(save_dir, file_name[:-3]+'wav'))
             # cut audio to 10s sample length
             #waveform=waveform[:, start_time*sample_rate:stop_time*sample_rate]

@@ -182,7 +182,7 @@ class Transcription_Analyzer:
                     break
             # audio = AudioSegment.from_file(os.path.join(save_dir, file_name))
             # audio.export(os.path.join(save_dir, file_name[:-3]+'wav'), format='wav')
-            waveform, sample_rate = torchaudio.load(os.path.join(save_dir, file_name[:-3]+'wav')))#
+            waveform, sample_rate = torchaudio.load(os.path.join(save_dir, file_name[:-3]+'wav'))#
             e_time=time.time()
             print('time', e_time-s_time)   
             # for file_name in os.listdir(save_dir):

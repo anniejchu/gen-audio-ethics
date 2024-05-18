@@ -382,6 +382,7 @@ if __name__ == '__main__':
         
         while True:
             print(q.qsize())
+            time.sleep(1)
             
         all_done=False
         while not all_done:

@@ -1,20 +1,20 @@
 #!/bin/bash
-#SBATCH --job-name=unit-test-networks
+#SBATCH --job-name=yt_dl
 #SBATCH --partition=ckpt
-#SBATCH --account=cse
+#SBATCH --account=jamiemmt
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=32
-#SBATCH --mem=256G
-#SBATCH --gres=gpu:0
+#SBATCH --mem=196G
+#SBATCH --gres=gpu:1
 #SBATCH --time=10:00:00
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=<>
 
 source ~/.bashrc
-conda activate <env name>
-cd <project dir>
+conda activate gen-audio-ethics2
+cd /gscratch/scrubbed/wagnew2/github/gen-audio-ethics
 echo "-----------"
 echo $1
-python transcription_analysis.py --num_processes=512 --save_loc=<> --youtube_ids=<>.csv
+python transcription_analysis.py --save_loc=/gscratch/scrubbed/wagnew2/yt_dl/ --youtube_ids=/gscratch/scrubbed/wagnew2/unbalanced_train_segments.csv --num_processes=512
 
 

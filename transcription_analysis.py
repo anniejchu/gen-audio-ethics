@@ -179,6 +179,7 @@ class Transcription_Analyzer:
             # audio = AudioSegment.from_file(os.path.join(save_dir, file_name))
             # audio.export(os.path.join(save_dir, file_name[:-3]+'wav'), format='wav')
             output.name="test.wav"
+            output.seek(0)
             temp_data, temp_sr = sf.read( output )
             print('temp_data', temp_data)
             waveform=torch.FloatTensor(temp_data)

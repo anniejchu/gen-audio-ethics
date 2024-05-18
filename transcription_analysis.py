@@ -241,7 +241,7 @@ class Transcription_Analyzer:
                 
             
             pickle.dump({'yt_info': info, 'wada_snr': wada_snr_measure, 'audio_tags': audio_tags, 'transcript': transcript, 'langauge': langauge, 'music_info': music_info}, open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
-            os.remove(os.path.join(save_dir, file_name[:-3]+'wav')
+            os.remove(os.path.join(save_dir, file_name[:-3]+'wav'))
     
     def whisper_transcribe(self, whisper_pipe, text_path):
         whisper_pipe[0].put(text_path)

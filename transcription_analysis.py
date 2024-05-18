@@ -157,11 +157,11 @@ class Transcription_Analyzer:
             }
             
             mem_fs = MemoryFS()
-            # output = io.BytesIO()#tempfile.SpooledTemporaryFile(max_size=1e12)#
-            # StreamWriter = codecs.getwriter('utf-8')  # here you pass the encoding
-            # wrapper_file = StreamWriter(output)
+            output = io.BytesIO()#tempfile.SpooledTemporaryFile(max_size=1e12)#
+            StreamWriter = codecs.getwriter('utf-8')  # here you pass the encoding
+            wrapper_file = StreamWriter(output)
             with mem_fs.open('test.wav', 'rw') as f:
-                with redirect_stdout(f), YoutubeDL(ydl_opts) as ydl:
+                with redirect_stdout(output), YoutubeDL(ydl_opts) as ydl:
                     error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
                     # try:
                     #     error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
@@ -171,9 +171,9 @@ class Transcription_Analyzer:
                     #     return
                         
                     info = ydl.extract_info(f'https://www.youtube.com/watch?v={youtube_id}', download=False)
-                    f.seek(0)
+                    output.seek(0)
                     # temp_data, temp_sr = sf.read( f )
-                    waveform=mp3_read_f32(f.read())
+                    waveform=mp3_read_f32(output.read())
                     #waveform, sample_rate = torchaudio.load(f)
                 
             # for file_name in os.listdir(save_dir):

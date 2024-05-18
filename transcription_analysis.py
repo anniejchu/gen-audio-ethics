@@ -183,9 +183,9 @@ class Transcription_Analyzer:
             #                 transcript=self.get_transcript_from_url(transcript_link['url'])
             # If this fails use whisper
             if transcript is None:
-                #result=whisper_pipe.transcribe(os.path.join(save_dir, file_name))#self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name))#whisper_transcriber.transcribe(os.path.join(save_dir, file_name))
-                transcript="Oh, can't you see I made, I made a mistake Please just look me in my face Tell me everything's okay Cause I got this"#result['text']
-                langauge="en"#result['langauge']
+                result=whisper_pipe.transcribe(os.path.join(save_dir, file_name))#self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name))#whisper_transcriber.transcribe(os.path.join(save_dir, file_name))
+                transcript=result['text']
+                langauge=result['langauge']
                 
             # If audio has music, try to get audio and artist info
             music_info=None

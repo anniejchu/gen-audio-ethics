@@ -201,8 +201,8 @@ class Transcription_Analyzer:
             os.remove(os.path.join(save_dir, file_name))
     
     def whisper_transcribe(self, whisper_pipe, text_path):
-        whisper_pipe.send(text_path)
-        transcription=whisper_pipe.recv()
+        whisper_pipe[0].put(text_path)
+        transcription=whisper_pipe[1].get()
         return transcription
     
     def get_transcript_from_url(self, transcript_url):
@@ -310,8 +310,8 @@ if __name__ == '__main__':
     whisper_transcriber=Whisper_Transcriber()
     analyzer=Transcription_Analyzer()
     #analyzer.get_audio_info_unk("/Users/williamagnew/eclipse-workspace/gen-audio-ethics/Flume - Never Be Like You feat. Kai [Ly7uj0JwgKg].m4a", "Oh, can't you see I made, I made a mistake Please just look me in my face Tell me everything's okay Cause I got this")
-    # analyzer.get_audio_info_youtube("Ly7uj0JwgKg", options.save_loc, 120, 130, [], whisper_transcriber)
-    # exit()
+    analyzer.get_audio_info_youtube("Ly7uj0JwgKg", options.save_loc, 120, 130, [], whisper_transcriber)
+    exit()
     
     with open(options.youtube_ids, newline='') as f:
         reader = csv.reader(f)
@@ -328,10 +328,11 @@ if __name__ == '__main__':
              q.put((yt_ids[ind][0], options.save_loc, int(float(yt_ids[ind][1].strip())), int(float(yt_ids[ind][2].strip())), yt_ids[ind][3:]))
         whisper_pipes=[]
         for ind in tqdm(range(options.num_processes)):
-            parent_conn, child_conn = Pipe()
-            whisper_pipes.append(parent_conn)
+            parent_queue=manager.Queue()
+            child_queue=manager.Queue()
+            whisper_pipes.append((parent_queue, child_queue))
             # mult_analyze((analyzer, q,child_conn))
-            run=pool.apply_async(mult_analyze, args=(analyzer, q,child_conn))
+            run=pool.apply_async(mult_analyze, args=(analyzer, q,(parent_queue, child_queue)))
             all_parallel_runs.append(run)
         
         all_done=False
@@ -341,11 +342,11 @@ if __name__ == '__main__':
                 if not run.ready():
                     all_done=False
             print(q.qsize())
-            for pipe in whisper_pipes:
-                while pipe.poll(0.01):
-                    audio_file=pipe.recv()
+            for queues in whisper_pipes:
+                while not queues[0].empty():
+                    audio_file=queues[0].get()
                     result=whisper_transcriber.transcribe(audio_file)
-                    pipe.send(result)
+                    queues[1].put(result)
             time.sleep(0.1)
     print("finished!")
     # Single threaded

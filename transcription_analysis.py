@@ -130,13 +130,13 @@ class Transcription_Analyzer:
                 'paths': {'home': save_dir},
             }
             with YoutubeDL(ydl_opts) as ydl:
-                error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
-                # try:
-                #     error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
-                # except yt_dlp.utils.DownloadError:
-                #     print(f'video unavailable! {youtube_id}')
-                #     pickle.dump('video unavailable!', open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
-                #     return
+                #error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
+                try:
+                    error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
+                except yt_dlp.utils.DownloadError:
+                    print(f'video unavailable! {youtube_id}')
+                    pickle.dump('video unavailable!', open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
+                    return
                     
                 info = ydl.extract_info(f'https://www.youtube.com/watch?v={youtube_id}', download=False)
             
@@ -190,10 +190,10 @@ class Transcription_Analyzer:
             # If audio has music, try to get audio and artist info
             music_info=None
             music_tags=[feat for feat in audio_tags if feat[0] in self.music_codes]
-            print('music_tags', music_tags)
+            #print('music_tags', music_tags)
             if len(music_tags)>0:
                 music_info=self.get_audio_info_unk(os.path.join(save_dir, file_name[:-3]+'wav'), transcript)
-            print('music_info', music_info)
+            #print('music_info', music_info)
             #langauge=whisper_transcriber.get_language(os.path.join(save_dir, file_name))
                 
             
@@ -310,7 +310,7 @@ if __name__ == '__main__':
     #whisper_transcriber=Whisper_Transcriber()
     analyzer=Transcription_Analyzer()
     #analyzer.get_audio_info_unk("/Users/williamagnew/eclipse-workspace/gen-audio-ethics/Flume - Never Be Like You feat. Kai [Ly7uj0JwgKg].m4a", "Oh, can't you see I made, I made a mistake Please just look me in my face Tell me everything's okay Cause I got this")
-    analyzer.get_audio_info_youtube("Ly7uj0JwgKg", options.save_loc, 120, 130, [], None)
+    #analyzer.get_audio_info_youtube("Ly7uj0JwgKg", options.save_loc, 120, 130, [], None)
     # exit()
     
     with open(options.youtube_ids, newline='') as f:

@@ -157,9 +157,9 @@ class Transcription_Analyzer:
             
             
             output = io.BytesIO()#tempfile.SpooledTemporaryFile(max_size=1e12)#
-            # StreamWriter = codecs.getwriter('utf-8')  # here you pass the encoding
-            # wrapper_file = StreamWriter(output)
-            with redirect_stdout(output), YoutubeDL(ydl_opts) as ydl:
+            StreamWriter = codecs.getwriter('utf-8')  # here you pass the encoding
+            wrapper_file = StreamWriter(output)
+            with redirect_stdout(wrapper_file), YoutubeDL(ydl_opts) as ydl:
                 error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
                 # try:
                 #     error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])

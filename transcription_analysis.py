@@ -138,11 +138,8 @@ class Transcription_Analyzer:
     
     def mp_get_audio_info_youtube(self, q, child_conn):
         while not q.empty():
-            try:
-                youtube_id, save_dir, start_time, stop_time, features=q.get()
-                self.get_audio_info_youtube(youtube_id, save_dir, start_time, stop_time, features, child_conn)
-            except queue.Empty:
-                break
+            youtube_id, save_dir, start_time, stop_time, features=q.get()
+            self.get_audio_info_youtube(youtube_id, save_dir, start_time, stop_time, features, child_conn)
         
     
     def get_audio_info_youtube(self, youtube_id, save_dir, start_time, stop_time, features, whisper_pipe):
@@ -229,7 +226,7 @@ class Transcription_Analyzer:
             #             if transcript_link['ext']=='vtt':
             #                 transcript=self.get_transcript_from_url(transcript_link['url'])
             # If this fails use whisper
-            transcript=""
+            transcript="jh jhb fgc"
             langauge=""
             # if transcript is None:
             #     result=self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name[:-3]+'wav'))#whisper_transcriber.transcribe(os.path.join(save_dir, file_name[:-3]+'wav'))#

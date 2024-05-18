@@ -310,8 +310,8 @@ if __name__ == '__main__':
     whisper_transcriber=Whisper_Transcriber()
     analyzer=Transcription_Analyzer()
     #analyzer.get_audio_info_unk("/Users/williamagnew/eclipse-workspace/gen-audio-ethics/Flume - Never Be Like You feat. Kai [Ly7uj0JwgKg].m4a", "Oh, can't you see I made, I made a mistake Please just look me in my face Tell me everything's okay Cause I got this")
-    analyzer.get_audio_info_youtube("Ly7uj0JwgKg", options.save_loc, 120, 130, [], whisper_transcriber)
-    exit()
+    # analyzer.get_audio_info_youtube("Ly7uj0JwgKg", options.save_loc, 120, 130, [], whisper_transcriber)
+    # exit()
     
     with open(options.youtube_ids, newline='') as f:
         reader = csv.reader(f)

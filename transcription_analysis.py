@@ -173,7 +173,6 @@ class Transcription_Analyzer:
                 #     return
                     
                 info = ydl.extract_info(f'https://www.youtube.com/watch?v={youtube_id}', download=False)
-                output.seek(0)
                 # temp_data, temp_sr = sf.read(output.read(), channels=2, samplerate=44100,
                 #        subtype='FLOAT', format='RAW')
                     #waveform=mp3_read_f32(output.read())

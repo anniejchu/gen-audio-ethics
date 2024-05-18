@@ -185,7 +185,7 @@ class Transcription_Analyzer:
             if transcript is None:
                 result=whisper_transcriber.transcribe(os.path.join(save_dir, file_name[:-3]+'wav'))#self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name[:-3]+'wav'))#
                 transcript=result['text']
-                langauge=result['langauge']
+                langauge=result['language']
                 
             # If audio has music, try to get audio and artist info
             music_info=None

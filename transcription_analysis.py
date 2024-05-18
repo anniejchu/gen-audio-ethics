@@ -30,7 +30,26 @@ from pathlib import Path
 import io
 import tempfile
 import codecs
+from miniaudio import DecodeError, ffi, lib
+import resampy
+import soundfile as sf
 
+def mp3_read_f32(data: bytes) -> array:
+    '''Reads and decodes the whole mp3 audio data. Resulting sample format is 32 bits float.'''
+    config = ffi.new('drmp3_config *')
+    num_frames = ffi.new('drmp3_uint64 *')
+    memory = lib.drmp3_open_memory_and_read_pcm_frames_f32(data, len(data), config, num_frames, ffi.NULL)
+    if not memory:
+        raise DecodeError('cannot load/decode data')
+    try:
+        samples = array.array('f')
+        buffer = ffi.buffer(memory, num_frames[0] * config.channels * 4)
+        samples.frombytes(buffer)
+        return samples, config.sampleRate, config.channels
+    finally:
+        lib.drmp3_free(memory, ffi.NULL)
+        ffi.release(num_frames)
+        
 def mult_analyze(analyzer,q,child_conn):
     # print('a')
     # analyzer,q,child_conn=args
@@ -136,7 +155,7 @@ class Transcription_Analyzer:
             }
             
             
-            output = tempfile.SpooledTemporaryFile(max_size=10e12)#io.BytesIO()
+            output = io.BytesIO()
             StreamWriter = codecs.getwriter('utf-8')  # here you pass the encoding
             wrapper_file = StreamWriter(output)
             with redirect_stdout(output), YoutubeDL(ydl_opts) as ydl:
@@ -158,10 +177,11 @@ class Transcription_Analyzer:
             # audio = AudioSegment.from_file(os.path.join(save_dir, file_name))
             # audio.export(os.path.join(save_dir, file_name[:-3]+'wav'), format='wav')
             
-            waveform, sample_rate = torchaudio.load(output)#os.path.join(save_dir, file_name[:-3]+'wav'))
+            waveform=torch.FloatTensor(mp3_read_f32(output))
+            #waveform, sample_rate = torchaudio.load(output)#os.path.join(save_dir, file_name[:-3]+'wav'))
             # cut audio to 10s sample length
-            waveform=waveform[:, start_time*sample_rate:stop_time*sample_rate]
-            #torchaudio.save(os.path.join(save_dir, file_name[:-3]+'wav'), waveform, sample_rate)
+            #waveform=waveform[:, start_time*sample_rate:stop_time*sample_rate]
+            torchaudio.save(os.path.join(save_dir, file_name[:-3]+'wav'), waveform, sample_rate)
             wada_snr_measure=float('nan')
             if waveform.shape[1]>0:
                 wada_snr_measure=wada_snr(waveform)

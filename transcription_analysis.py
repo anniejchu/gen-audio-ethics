@@ -161,7 +161,7 @@ class Transcription_Analyzer:
             StreamWriter = codecs.getwriter('utf-8')  # here you pass the encoding
             wrapper_file = StreamWriter(output)
             with mem_fs.open('test.wav', 'rw') as f:
-                with redirect_stdout(output), YoutubeDL(ydl_opts) as ydl:
+                with redirect_stdout(wrapper_file), YoutubeDL(ydl_opts) as ydl:
                     error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
                     # try:
                     #     error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])

@@ -178,7 +178,7 @@ class Transcription_Analyzer:
             # audio = AudioSegment.from_file(os.path.join(save_dir, file_name))
             # audio.export(os.path.join(save_dir, file_name[:-3]+'wav'), format='wav')
             
-            waveform=torch.FloatTensor(mp3_read_f32(output))
+            waveform=torch.FloatTensor(mp3_read_f32(output.read()))
             #waveform, sample_rate = torchaudio.load(output)#os.path.join(save_dir, file_name[:-3]+'wav'))
             # cut audio to 10s sample length
             #waveform=waveform[:, start_time*sample_rate:stop_time*sample_rate]

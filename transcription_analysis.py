@@ -361,6 +361,22 @@ if __name__ == '__main__':
     
     whisper_transcriber=Whisper_Transcriber()
     analyzer=Transcription_Analyzer()
+    
+    ydl_opts = {
+                'format': 'bestaudio/best',
+                # ℹ️ See help(yt_dlp.postprocessor) for a list of available Postprocessors and their arguments
+                'postprocessors': [{  # Extract audio using ffmpeg
+                    'key': 'FFmpegExtractAudio',
+                    'preferredcodec': 'wav',
+                }],
+                'paths': {'home': save_dir},
+            }
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        try:
+            ydl.cache.remove()
+        except youtube_dl.DownloadError as error:
+            pass
+
     #analyzer.get_audio_info_unk("/Users/williamagnew/eclipse-workspace/gen-audio-ethics/Flume - Never Be Like You feat. Kai [Ly7uj0JwgKg].m4a", "Oh, can't you see I made, I made a mistake Please just look me in my face Tell me everything's okay Cause I got this")
     # analyzer.get_audio_info_youtube("Ly7uj0JwgKg", options.save_loc, 120, 130, [], None)
     # exit()

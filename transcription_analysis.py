@@ -226,12 +226,13 @@ class Transcription_Analyzer:
             #             if transcript_link['ext']=='vtt':
             #                 transcript=self.get_transcript_from_url(transcript_link['url'])
             # If this fails use whisper
-            transcript="jh jhb fgc"
-            langauge=""
-            # if transcript is None:
-            #     result=self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name[:-3]+'wav'))#whisper_transcriber.transcribe(os.path.join(save_dir, file_name[:-3]+'wav'))#
-            #     transcript=result['text']
-            #     langauge=result['language']
+            s_time=time.time()
+            if transcript is None:
+                result=self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name[:-3]+'wav'))#whisper_transcriber.transcribe(os.path.join(save_dir, file_name[:-3]+'wav'))#
+                transcript=result['text']
+                langauge=result['language']
+            e_time=time.time()
+            print('translate time', e_time-s_time)   
                 
             # If audio has music, try to get audio and artist info
             music_info=None

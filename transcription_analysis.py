@@ -371,7 +371,7 @@ if __name__ == '__main__':
                 }],
                 'paths': {'home': options.save_loc},
             }
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+    with YoutubeDL(ydl_opts) as ydl:
         try:
             ydl.cache.remove()
         except youtube_dl.DownloadError as error:

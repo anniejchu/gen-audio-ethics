@@ -163,7 +163,7 @@ class Transcription_Analyzer:
             with YoutubeDL(ydl_opts) as ydl:
                 # error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
                 try:
-                    #error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
+                    error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
                     info = ydl.extract_info(f'https://www.youtube.com/watch?v={youtube_id}', download=False)
                 except yt_dlp.utils.DownloadError:
                     print(f'video unavailable! {youtube_id}')
@@ -179,15 +179,15 @@ class Transcription_Analyzer:
                 if f'[{youtube_id}].wav' in file_name:
                     break
            
-            # waveform, sample_rate = torchaudio.load(os.path.join(save_dir, file_name[:-3]+'wav'))#
-            # e_time=time.time()
-            # print('time a', e_time-s_time)   
-            # s_time=time.time()
-            # waveform=waveform[:, start_time*sample_rate:stop_time*sample_rate]
-            # torchaudio.save(os.path.join(save_dir, file_name[:-3]+'wav'), waveform, sample_rate)
+            waveform, sample_rate = torchaudio.load(os.path.join(save_dir, file_name[:-3]+'wav'))#
+            e_time=time.time()
+            print('time a', e_time-s_time)   
+            s_time=time.time()
+            waveform=waveform[:, start_time*sample_rate:stop_time*sample_rate]
+            torchaudio.save(os.path.join(save_dir, file_name[:-3]+'wav'), waveform, sample_rate)
             wada_snr_measure=float('nan')
-            # if waveform.shape[1]>0:
-            #     wada_snr_measure=wada_snr(waveform)
+            if waveform.shape[1]>0:
+                wada_snr_measure=wada_snr(waveform)
             # e_time=time.time()
             # print('time b', e_time-s_time)   
             
@@ -196,37 +196,34 @@ class Transcription_Analyzer:
             for feature in features:
                 f=feature.replace('"', '')
                 audio_tags.append((self.audio_features[feature.replace('"', '').strip()], 1.0))
-            
-            
-                
-            
+
             transcript=None
-            langauge="en"
+
             #Get creator made English transcript
-            if 'subtitles' in info:
-                subtitles_keys=list(info['subtitles'].keys())
-                for subtitles_key in subtitles_keys:
-                    if subtitles_key[:3]=='en-':
-                        transcript_links=info['subtitles'][subtitles_key]
-                        for transcript_link in transcript_links:
-                            if transcript_link['ext']=='vtt':
-                                transcript=self.get_transcript_from_url(transcript_link['url'])
-            # If this fails get youtube transcript
-            if transcript is None:
-                if 'automatic_captions' in info and 'en' in info['automatic_captions']:
-                    transcript_links=info['automatic_captions']['en']
-                    for transcript_link in transcript_links:
-                        if transcript_link['ext']=='vtt':
-                            transcript=self.get_transcript_from_url(transcript_link['url'])
+            # if 'subtitles' in info:
+            #     subtitles_keys=list(info['subtitles'].keys())
+            #     for subtitles_key in subtitles_keys:
+            #         if subtitles_key[:3]=='en-':
+            #             transcript_links=info['subtitles'][subtitles_key]
+            #             for transcript_link in transcript_links:
+            #                 if transcript_link['ext']=='vtt':
+            #                     transcript=self.get_transcript_from_url(transcript_link['url'])
+            # # If this fails get youtube transcript
+            # if transcript is None:
+            #     if 'automatic_captions' in info and 'en' in info['automatic_captions']:
+            #         transcript_links=info['automatic_captions']['en']
+            #         for transcript_link in transcript_links:
+            #             if transcript_link['ext']=='vtt':
+            #                 transcript=self.get_transcript_from_url(transcript_link['url'])
             # If this fails use whisper
             
-            # s_time=time.time()
-            # if transcript is None:
-            #     result=self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name[:-3]+'wav'))#whisper_transcriber.transcribe(os.path.join(save_dir, file_name[:-3]+'wav'))#
-            #     transcript=result['text']
-            #     langauge=result['language']
-            # e_time=time.time()
-            # print('translate time', e_time-s_time)   
+            s_time=time.time()
+            if transcript is None:
+                result=self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name[:-3]+'wav'))#whisper_transcriber.transcribe(os.path.join(save_dir, file_name[:-3]+'wav'))#
+                transcript=result['text']
+                langauge=result['language']
+            e_time=time.time()
+            print('translate time', e_time-s_time)   
                 
             # If audio has music, try to get audio and artist info
             music_info=None
@@ -241,7 +238,7 @@ class Transcription_Analyzer:
             print('e')
             pickle.dump({'yt_info': info, 'wada_snr': wada_snr_measure, 'audio_tags': audio_tags, 'transcript': transcript, 'langauge': langauge, 'music_info': music_info}, open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
             # print('f')
-            # os.remove(os.path.join(save_dir, file_name[:-3]+'wav'))
+            os.remove(os.path.join(save_dir, file_name[:-3]+'wav'))
             # print('g')
     
     def whisper_transcribe(self, whisper_pipe, text_path):

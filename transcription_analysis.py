@@ -185,7 +185,7 @@ class Transcription_Analyzer:
             # s_time=time.time()
             # waveform=waveform[:, start_time*sample_rate:stop_time*sample_rate]
             # torchaudio.save(os.path.join(save_dir, file_name[:-3]+'wav'), waveform, sample_rate)
-            # wada_snr_measure=float('nan')
+            wada_snr_measure=float('nan')
             # if waveform.shape[1]>0:
             #     wada_snr_measure=wada_snr(waveform)
             # e_time=time.time()

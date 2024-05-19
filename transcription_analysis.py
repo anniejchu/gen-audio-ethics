@@ -202,7 +202,7 @@ class Transcription_Analyzer:
             
             transcript=None
             langauge="en"
-            Get creator made English transcript
+            #Get creator made English transcript
             if 'subtitles' in info:
                 subtitles_keys=list(info['subtitles'].keys())
                 for subtitles_key in subtitles_keys:

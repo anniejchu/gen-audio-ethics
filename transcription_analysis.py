@@ -365,11 +365,11 @@ if __name__ == '__main__':
     # analyzer.get_audio_info_youtube("Ly7uj0JwgKg", options.save_loc, 120, 130, [], None)
     # exit()
     
-    # with open(options.youtube_ids, newline='') as f:
-    #     reader = csv.reader(f)
-    #     yt_ids = list(reader)
-    # yt_ids=yt_ids[3:]
-    # random.shuffle(yt_ids)
+    with open(options.youtube_ids, newline='') as f:
+        reader = csv.reader(f)
+        yt_ids = list(reader)
+    yt_ids=yt_ids[3:]
+    random.shuffle(yt_ids)
     # for yt_id in yt_ids:
     #     analyzer.get_audio_info_youtube(yt_id[0], options.save_loc, int(float(yt_id[1].strip())), int(float(yt_id[2].strip())), yt_id[3:], None)
     

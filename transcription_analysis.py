@@ -369,7 +369,7 @@ if __name__ == '__main__':
                     'key': 'FFmpegExtractAudio',
                     'preferredcodec': 'wav',
                 }],
-                'paths': {'home': save_dir},
+                'paths': {'home': options.save_dir},
             }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         try:

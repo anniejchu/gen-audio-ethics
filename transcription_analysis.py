@@ -180,12 +180,13 @@ class Transcription_Analyzer:
                 # s_time=time.time()
                 # waveform=waveform[:, start_time*sample_rate:stop_time*sample_rate]
                 # torchaudio.save(os.path.join(save_dir, file_name[:-3]+'wav'), waveform, sample_rate)
+                print('a')
                 wada_snr_measure=float('nan')
                 if waveform.shape[1]>0:
                     wada_snr_measure=wada_snr(waveform)
                 # e_time=time.time()
                 # print('time b', e_time-s_time)   
-                
+                print('b')
                 # audio_tags=self.get_sound_tags(waveform.numpy())
                 audio_tags=[]
                 for feature in features:
@@ -193,7 +194,7 @@ class Transcription_Analyzer:
                     audio_tags.append((self.audio_features[feature.replace('"', '').strip()], 1.0))
     
                 transcript=None
-    
+                print('c')
                 #Get creator made English transcript
                 # if 'subtitles' in info:
                 #     subtitles_keys=list(info['subtitles'].keys())
@@ -214,7 +215,8 @@ class Transcription_Analyzer:
                 
                 s_time=time.time()
                 if transcript is None:
-                    result=whisper_pipe.transcribe(os.path.join(save_dir, file_name))#self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name))#
+                    result=self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name))#
+                    print('d')
                     transcript=result['text']
                     langauge=result['language']
                 e_time=time.time()

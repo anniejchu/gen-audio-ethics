@@ -344,6 +344,11 @@ if __name__ == '__main__':
     (options, args) = parser.parse_args()
     print(options)
     
+    if options.info_transcribe:
+        print("Getting video metadata")
+    else:
+        print("Creating video transcriptions and getting artist info")
+    
     whisper_transcriber=Whisper_Transcriber()
     analyzer=Transcription_Analyzer()
     

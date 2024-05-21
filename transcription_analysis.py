@@ -143,23 +143,24 @@ class Transcription_Analyzer:
         
     
     def get_audio_info_youtube(self, youtube_id, save_dir, start_time, stop_time, features, whisper_pipe, info_transcribe=True):
-        if not os.path.exists(os.path.join(save_dir, f'{youtube_id}_info.lz4')):
-            ydl_opts = {
-                'format': 'bestaudio/best',
-                # ℹ️ See help(yt_dlp.postprocessor) for a list of available Postprocessors and their arguments
-                'postprocessors': [{  # Extract audio using ffmpeg
-                    'key': 'FFmpegExtractAudio',
-                    'preferredcodec': 'wav',
-                }],
-                'paths': {'home': save_dir},
-            }
-            
-            # mem_fs = MemoryFS()
-            # output = io.BytesIO()#tempfile.SpooledTemporaryFile(max_size=1e12)#
-            # StreamWriter = codecs.getwriter('utf-8')  # here you pass the encoding
-            # wrapper_file = StreamWriter(output)
-            # with mem_fs.open('test.wav', 'rw') as f:
-            if info_transcribe:
+        
+        ydl_opts = {
+            'format': 'bestaudio/best',
+            # ℹ️ See help(yt_dlp.postprocessor) for a list of available Postprocessors and their arguments
+            'postprocessors': [{  # Extract audio using ffmpeg
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'wav',
+            }],
+            'paths': {'home': save_dir},
+        }
+        
+        # mem_fs = MemoryFS()
+        # output = io.BytesIO()#tempfile.SpooledTemporaryFile(max_size=1e12)#
+        # StreamWriter = codecs.getwriter('utf-8')  # here you pass the encoding
+        # wrapper_file = StreamWriter(output)
+        # with mem_fs.open('test.wav', 'rw') as f:
+        if info_transcribe:
+            if not os.path.exists(os.path.join(save_dir, f'yt_info_{youtube_id}_metadata.lz4.lz4')):
                 with YoutubeDL(ydl_opts) as ydl:
                     # error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
                     try:
@@ -167,10 +168,11 @@ class Transcription_Analyzer:
                         info = ydl.extract_info(f'https://www.youtube.com/watch?v={youtube_id}', download=False)
                     except yt_dlp.utils.DownloadError:
                         print(f'video unavailable! {youtube_id}')
-                        pickle.dump('video unavailable!', open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
+                        pickle.dump('video unavailable!', open(os.path.join(save_dir, f'{youtube_id}_metadata.lz4'), 'wb'))
                         return
-                pickle.dump({'yt_info': info}, open(os.path.join(save_dir, f'yt_info_{youtube_id}_info.lz4'), 'wb'))
-            else:    
+                pickle.dump({'yt_info': info}, open(os.path.join(save_dir, f'yt_info_{youtube_id}_metadata.lz4'), 'wb'))
+        else:
+            if not os.path.exists(os.path.join(save_dir, f'{youtube_id}_info.lz4')):
                 file_name=f"{youtube_id}.flac"
                 waveform, sample_rate = torchaudio.load(os.path.join(save_dir, file_name))#
                 # e_time=time.time()

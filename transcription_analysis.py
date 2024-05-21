@@ -160,7 +160,7 @@ class Transcription_Analyzer:
         # wrapper_file = StreamWriter(output)
         # with mem_fs.open('test.wav', 'rw') as f:
         if info_transcribe:
-            if not os.path.exists(os.path.join(save_dir, f'yt_info_{youtube_id}_metadata.lz4.lz4')):
+            if not os.path.exists(os.path.join(save_dir, f'{youtube_id}_metadata.lz4')):
                 with YoutubeDL(ydl_opts) as ydl:
                     # error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
                     try:
@@ -170,7 +170,7 @@ class Transcription_Analyzer:
                         print(f'video unavailable! {youtube_id}')
                         pickle.dump('video unavailable!', open(os.path.join(save_dir, f'{youtube_id}_metadata.lz4'), 'wb'))
                         return
-                pickle.dump({'yt_info': info}, open(os.path.join(save_dir, f'yt_info_{youtube_id}_metadata.lz4'), 'wb'))
+                pickle.dump({'yt_info': info}, open(os.path.join(save_dir, f'{youtube_id}_metadata.lz4'), 'wb'))
         else:
             if not os.path.exists(os.path.join(save_dir, f'{youtube_id}_info.lz4')):
                 file_name=f"{youtube_id}.flac"

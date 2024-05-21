@@ -368,8 +368,7 @@ if __name__ == '__main__':
             pass
 
     #analyzer.get_audio_info_unk("/Users/williamagnew/eclipse-workspace/gen-audio-ethics/Flume - Never Be Like You feat. Kai [Ly7uj0JwgKg].m4a", "Oh, can't you see I made, I made a mistake Please just look me in my face Tell me everything's okay Cause I got this")
-    analyzer.get_audio_info_youtube("Ly7uj0JwgKg", options.save_loc, 120, 130, [], None, True)
-    exit()
+    analyzer.get_audio_info_youtube("Ly7uj0JwgKg", options.save_loc, 120, 130, [], None, options.info_transcribe)
     
     with open(options.youtube_ids, newline='') as f:
         reader = csv.reader(f)
@@ -380,10 +379,10 @@ if __name__ == '__main__':
         yt_infos_dict[yt_info[0]]=yt_info[3:]
             
     if not os.path.exists('youtube_video_ids.lz4'):  
-        yt_files=[]
+        yt_ids=[]
         for file_name in os.listdir(options.save_loc):
             if file_name[-5:]==".flac":
-                yt_files.append(file_name[:-5])
+                yt_ids.append(file_name[:-5])
         random.shuffle(yt_ids)
         
         pickle.dump(yt_ids, open('youtube_video_ids.lz4', 'wb'))

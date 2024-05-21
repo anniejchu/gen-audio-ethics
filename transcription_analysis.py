@@ -138,8 +138,8 @@ class Transcription_Analyzer:
     
     def mp_get_audio_info_youtube(self, q, child_conn):
         while not q.empty():
-            youtube_id, save_dir, start_time, stop_time, features=q.get()
-            self.get_audio_info_youtube(youtube_id, save_dir, start_time, stop_time, features, child_conn)
+            youtube_id, save_dir, start_time, stop_time, features, info_dl=q.get()
+            self.get_audio_info_youtube(youtube_id, save_dir, start_time, stop_time, features, child_conn, info_dl)
         
     
     def get_audio_info_youtube(self, youtube_id, save_dir, start_time, stop_time, features, whisper_pipe, info_transcribe=True):
@@ -213,8 +213,6 @@ class Transcription_Analyzer:
                 # If this fails use whisper
                 
                 s_time=time.time()
-                transcript="sgf seefgh"
-                langauge="en"
                 if transcript is None:
                     result=self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name))#whisper_transcriber.transcribe(os.path.join(save_dir, file_name[:-3]+'wav'))#
                     transcript=result['text']
@@ -232,7 +230,6 @@ class Transcription_Analyzer:
                 #print('music_info', music_info)
                 #langauge=whisper_transcriber.get_language(os.path.join(save_dir, file_name))
                     
-                print('e')
                 pickle.dump({'wada_snr': wada_snr_measure, 'audio_tags': audio_tags, 'transcript': transcript, 'langauge': langauge, 'music_info': music_info}, open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
                 # print('f')
                 #os.remove(os.path.join(save_dir, file_name[:-3]+'wav'))

@@ -178,7 +178,7 @@ class Transcription_Analyzer:
             # for file_name in os.listdir(save_dir):
             #     if f'[{youtube_id}].wav' in file_name:
             #         break
-            file_name=f"{youtube_id.flac}"
+            file_name=f"{youtube_id}.flac"
             waveform, sample_rate = torchaudio.load(os.path.join(save_dir, file_name))#
             # e_time=time.time()
             # print('time a', e_time-s_time)   

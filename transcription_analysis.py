@@ -372,10 +372,11 @@ if __name__ == '__main__':
 
     manager=Manager()
     #analyzer.get_audio_info_unk("/Users/williamagnew/eclipse-workspace/gen-audio-ethics/Flume - Never Be Like You feat. Kai [Ly7uj0JwgKg].m4a", "Oh, can't you see I made, I made a mistake Please just look me in my face Tell me everything's okay Cause I got this")
-    parent_queue=manager.Queue()
-    child_queue=manager.Queue()
-    analyzer.get_audio_info_youtube("ZZzwHGqVw0c", options.save_loc, 120, 130, [], (parent_queue, child_queue), options.info_transcribe)
-    
+    # parent_queue=manager.Queue()
+    # child_queue=manager.Queue()
+    # analyzer.get_audio_info_youtube("ZZzwHGqVw0c", options.save_loc, 120, 130, [], (parent_queue, child_queue), options.info_transcribe)
+    #
+
     with open(options.youtube_ids, newline='') as f:
         reader = csv.reader(f)
         yt_ids = list(reader)
@@ -414,10 +415,6 @@ if __name__ == '__main__':
             # mult_analyze((analyzer, q,child_conn))
             run=pool.apply_async(mult_analyze, args=(analyzer, q,(parent_queue, child_queue)))
             all_parallel_runs.append(run)
-        
-        while not q.empty():
-            print(q.qsize())
-            time.sleep(1)
             
         all_done=False
         while not all_done:

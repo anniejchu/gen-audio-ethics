@@ -142,7 +142,7 @@ class Transcription_Analyzer:
             self.get_audio_info_youtube(youtube_id, save_dir, start_time, stop_time, features, child_conn)
         
     
-    def get_audio_info_youtube(self, youtube_id, save_dir, start_time, stop_time, features, whisper_pipe):
+    def get_audio_info_youtube(self, youtube_id, save_dir, start_time, stop_time, features, whisper_pipe, info_transcribe=True):
         if not os.path.exists(os.path.join(save_dir, f'{youtube_id}_info.lz4')):
             ydl_opts = {
                 'format': 'bestaudio/best',
@@ -159,87 +159,80 @@ class Transcription_Analyzer:
             # StreamWriter = codecs.getwriter('utf-8')  # here you pass the encoding
             # wrapper_file = StreamWriter(output)
             # with mem_fs.open('test.wav', 'rw') as f:
-            s_time=time.time()
-            with YoutubeDL(ydl_opts) as ydl:
-                # error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
-                try:
+            if info_transcribe:
+                with YoutubeDL(ydl_opts) as ydl:
                     # error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
-                    info = ydl.extract_info(f'https://www.youtube.com/watch?v={youtube_id}', download=False)
-                except yt_dlp.utils.DownloadError:
-                    print(f'video unavailable! {youtube_id}')
-                    pickle.dump('video unavailable!', open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
-                    return
+                    try:
+                        # error_code=ydl.download([f'https://www.youtube.com/watch?v={youtube_id}'])
+                        info = ydl.extract_info(f'https://www.youtube.com/watch?v={youtube_id}', download=False)
+                    except yt_dlp.utils.DownloadError:
+                        print(f'video unavailable! {youtube_id}')
+                        pickle.dump('video unavailable!', open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
+                        return
+                pickle.dump({'yt_info': info}, open(os.path.join(save_dir, f'yt_info_{youtube_id}_info.lz4'), 'wb'))
+            else:    
+                file_name=f"{youtube_id}.flac"
+                waveform, sample_rate = torchaudio.load(os.path.join(save_dir, file_name))#
+                # e_time=time.time()
+                # print('time a', e_time-s_time)   
+                # s_time=time.time()
+                # waveform=waveform[:, start_time*sample_rate:stop_time*sample_rate]
+                # torchaudio.save(os.path.join(save_dir, file_name[:-3]+'wav'), waveform, sample_rate)
+                wada_snr_measure=float('nan')
+                if waveform.shape[1]>0:
+                    wada_snr_measure=wada_snr(waveform)
+                # e_time=time.time()
+                # print('time b', e_time-s_time)   
+                
+                # audio_tags=self.get_sound_tags(waveform.numpy())
+                audio_tags=[]
+                for feature in features:
+                    f=feature.replace('"', '')
+                    audio_tags.append((self.audio_features[feature.replace('"', '').strip()], 1.0))
+    
+                transcript=None
+    
+                #Get creator made English transcript
+                # if 'subtitles' in info:
+                #     subtitles_keys=list(info['subtitles'].keys())
+                #     for subtitles_key in subtitles_keys:
+                #         if subtitles_key[:3]=='en-':
+                #             transcript_links=info['subtitles'][subtitles_key]
+                #             for transcript_link in transcript_links:
+                #                 if transcript_link['ext']=='vtt':
+                #                     transcript=self.get_transcript_from_url(transcript_link['url'])
+                # # If this fails get youtube transcript
+                # if transcript is None:
+                #     if 'automatic_captions' in info and 'en' in info['automatic_captions']:
+                #         transcript_links=info['automatic_captions']['en']
+                #         for transcript_link in transcript_links:
+                #             if transcript_link['ext']=='vtt':
+                #                 transcript=self.get_transcript_from_url(transcript_link['url'])
+                # If this fails use whisper
+                
+                s_time=time.time()
+                if transcript is None:
+                    result=self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name))#whisper_transcriber.transcribe(os.path.join(save_dir, file_name[:-3]+'wav'))#
+                    transcript=result['text']
+                    langauge=result['language']
+                e_time=time.time()
+                print('translate time', e_time-s_time)   
                     
-                
-                # temp_data, temp_sr = sf.read(output.read(), channels=2, samplerate=44100,
-                #        subtype='FLOAT', format='RAW')
-                    #waveform=mp3_read_f32(output.read())
-                    #waveform, sample_rate = torchaudio.load(f)
-            # for file_name in os.listdir(save_dir):
-            #     if f'[{youtube_id}].wav' in file_name:
-            #         break
-            file_name=f"{youtube_id}.flac"
-            waveform, sample_rate = torchaudio.load(os.path.join(save_dir, file_name))#
-            # e_time=time.time()
-            # print('time a', e_time-s_time)   
-            # s_time=time.time()
-            # waveform=waveform[:, start_time*sample_rate:stop_time*sample_rate]
-            # torchaudio.save(os.path.join(save_dir, file_name[:-3]+'wav'), waveform, sample_rate)
-            wada_snr_measure=float('nan')
-            if waveform.shape[1]>0:
-                wada_snr_measure=wada_snr(waveform)
-            # e_time=time.time()
-            # print('time b', e_time-s_time)   
-            
-            # audio_tags=self.get_sound_tags(waveform.numpy())
-            audio_tags=[]
-            for feature in features:
-                f=feature.replace('"', '')
-                audio_tags.append((self.audio_features[feature.replace('"', '').strip()], 1.0))
-
-            transcript=None
-
-            #Get creator made English transcript
-            # if 'subtitles' in info:
-            #     subtitles_keys=list(info['subtitles'].keys())
-            #     for subtitles_key in subtitles_keys:
-            #         if subtitles_key[:3]=='en-':
-            #             transcript_links=info['subtitles'][subtitles_key]
-            #             for transcript_link in transcript_links:
-            #                 if transcript_link['ext']=='vtt':
-            #                     transcript=self.get_transcript_from_url(transcript_link['url'])
-            # # If this fails get youtube transcript
-            # if transcript is None:
-            #     if 'automatic_captions' in info and 'en' in info['automatic_captions']:
-            #         transcript_links=info['automatic_captions']['en']
-            #         for transcript_link in transcript_links:
-            #             if transcript_link['ext']=='vtt':
-            #                 transcript=self.get_transcript_from_url(transcript_link['url'])
-            # If this fails use whisper
-            
-            s_time=time.time()
-            if transcript is None:
-                result=self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name))#whisper_transcriber.transcribe(os.path.join(save_dir, file_name[:-3]+'wav'))#
-                transcript=result['text']
-                langauge=result['language']
-            e_time=time.time()
-            print('translate time', e_time-s_time)   
-                
-            # If audio has music, try to get audio and artist info
-            music_info=None
-            music_tags=[feat for feat in audio_tags if feat[0] in self.music_codes]
-            #print('music_tags', music_tags)
-            if len(music_tags)>0:
-                print('d')
-                music_info=self.get_audio_info_unk(os.path.join(save_dir, file_name[:-3]+'wav'), transcript)
-            #print('music_info', music_info)
-            #langauge=whisper_transcriber.get_language(os.path.join(save_dir, file_name))
-                
-            print('e')
-            pickle.dump({'yt_info': info, 'wada_snr': wada_snr_measure, 'audio_tags': audio_tags, 'transcript': transcript, 'langauge': langauge, 'music_info': music_info}, open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
-            # print('f')
-            #os.remove(os.path.join(save_dir, file_name[:-3]+'wav'))
-            # print('g')
+                # If audio has music, try to get audio and artist info
+                music_info=None
+                music_tags=[feat for feat in audio_tags if feat[0] in self.music_codes]
+                #print('music_tags', music_tags)
+                if len(music_tags)>0:
+                    print('d')
+                    music_info=self.get_audio_info_unk(os.path.join(save_dir, file_name[:-3]+'wav'), transcript)
+                #print('music_info', music_info)
+                #langauge=whisper_transcriber.get_language(os.path.join(save_dir, file_name))
+                    
+                print('e')
+                pickle.dump({'wada_snr': wada_snr_measure, 'audio_tags': audio_tags, 'transcript': transcript, 'langauge': langauge, 'music_info': music_info}, open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
+                # print('f')
+                #os.remove(os.path.join(save_dir, file_name[:-3]+'wav'))
+                # print('g')
     
     def whisper_transcribe(self, whisper_pipe, text_path):
         whisper_pipe[0].put(text_path)
@@ -346,6 +339,7 @@ if __name__ == '__main__':
     parser.add_option("--save_loc", dest="save_loc", default='/Users/williamagnew/eclipse-workspace/gen-audio-ethics/')
     parser.add_option("--youtube_ids", dest="youtube_ids", default='/media/willie/1caf5422-4135-4f2c-9619-c44041b51146/audio_data/audioset/unbalanced_train_segments.csv')
     parser.add_option("--num_processes", type="int", dest="num_processes", default=24)
+    parser.add_option("--info_transcribe", type="int", dest="info_transcribe", default=0)
     
     (options, args) = parser.parse_args()
     print(options)
@@ -369,7 +363,7 @@ if __name__ == '__main__':
             pass
 
     #analyzer.get_audio_info_unk("/Users/williamagnew/eclipse-workspace/gen-audio-ethics/Flume - Never Be Like You feat. Kai [Ly7uj0JwgKg].m4a", "Oh, can't you see I made, I made a mistake Please just look me in my face Tell me everything's okay Cause I got this")
-    analyzer.get_audio_info_youtube("Ly7uj0JwgKg", options.save_loc, 120, 130, [], None)
+    analyzer.get_audio_info_youtube("Ly7uj0JwgKg", options.save_loc, 120, 130, [], None, True)
     exit()
     
     with open(options.youtube_ids, newline='') as f:
@@ -379,12 +373,19 @@ if __name__ == '__main__':
     yt_infos_dict={}
     for yt_info in yt_infos:
         yt_infos_dict[yt_info[0]]=yt_info[3:]
+            
+    if not os.path.exists('youtube_video_ids.lz4'):  
+        yt_files=[]
+        for file_name in os.listdir(options.save_loc):
+            if file_name[-5:]==".flac":
+                yt_files.append(file_name[:-5])
+        random.shuffle(yt_ids)
         
-    yt_files=[]
-    for file_name in os.listdir(options.save_loc):
-        if file_name[-5:]==".flac":
-            yt_files.append(file_name[:-5])
-    random.shuffle(yt_ids)
+        pickle.dump(yt_ids, open('youtube_video_ids.lz4', 'wb'))
+    else:
+        yt_ids=pickle.load(open('youtube_video_ids.lz4', 'rb'))
+        print("loaded youtube ids list")
+    
     # for yt_id in yt_ids:
     #     analyzer.get_audio_info_youtube(yt_id[0], options.save_loc, int(float(yt_id[1].strip())), int(float(yt_id[2].strip())), yt_id[3:], None)
     
@@ -394,7 +395,7 @@ if __name__ == '__main__':
         manager=Manager()
         q = manager.Queue()
         for ind in tqdm(range(len(yt_ids))):
-             q.put((yt_ids[ind], options.save_loc, 0, 0, yt_infos_dict[yt_ids[ind]]))
+             q.put((yt_ids[ind], options.save_loc, 0, 0, yt_infos_dict[yt_ids[ind]], options.info_transcribe))
         whisper_pipes=[]
         for ind in tqdm(range(options.num_processes)):
             parent_queue=manager.Queue()

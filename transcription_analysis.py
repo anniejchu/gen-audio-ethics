@@ -370,8 +370,11 @@ if __name__ == '__main__':
         except youtube_dl.DownloadError as error:
             pass
 
+    manager=Manager()
     #analyzer.get_audio_info_unk("/Users/williamagnew/eclipse-workspace/gen-audio-ethics/Flume - Never Be Like You feat. Kai [Ly7uj0JwgKg].m4a", "Oh, can't you see I made, I made a mistake Please just look me in my face Tell me everything's okay Cause I got this")
-    analyzer.get_audio_info_youtube("ZZzwHGqVw0c", options.save_loc, 120, 130, [], whisper_transcriber, options.info_transcribe)
+    parent_queue=manager.Queue()
+    child_queue=manager.Queue()
+    analyzer.get_audio_info_youtube("ZZzwHGqVw0c", options.save_loc, 120, 130, (parent_queue, child_queue), whisper_transcriber, options.info_transcribe)
     
     with open(options.youtube_ids, newline='') as f:
         reader = csv.reader(f)
@@ -399,7 +402,7 @@ if __name__ == '__main__':
     # Multithreaded
     all_parallel_runs=[]
     with mp.Pool(processes=options.num_processes, maxtasksperchild=1) as pool:
-        manager=Manager()
+        
         q = manager.Queue()
         for ind in tqdm(range(len(yt_ids))):
              q.put((yt_ids[ind], options.save_loc, 0, 0, yt_infos_dict[yt_ids[ind]], options.info_transcribe))

@@ -229,7 +229,7 @@ class Transcription_Analyzer:
                 #langauge=whisper_transcriber.get_language(os.path.join(save_dir, file_name))
                     
                 pickle.dump({'wada_snr': wada_snr_measure, 'audio_tags': audio_tags, 'transcript': transcript, 'langauge': langauge, 'music_info': music_info}, open(os.path.join(save_dir, f'{youtube_id}_info.lz4'), 'wb'))
-                # print('f')
+                print('f')
                 #os.remove(os.path.join(save_dir, file_name[:-3]+'wav'))
                 # print('g')
     

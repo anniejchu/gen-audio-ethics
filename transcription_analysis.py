@@ -212,8 +212,8 @@ class Transcription_Analyzer:
                 # If this fails use whisper
                 
                 s_time=time.time()
-                transcript="sefsef sefsegdrg"
-                langauge="en"
+                # transcript="sefsef sefsegdrg"
+                # langauge="en"
                 if transcript is None:
                     result=self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name))#
                     transcript=result['text']
@@ -226,7 +226,7 @@ class Transcription_Analyzer:
                 music_tags=[feat for feat in audio_tags if feat[0] in self.music_codes]
                 #print('music_tags', music_tags)
                 if len(music_tags)>0:
-                    music_info=self.get_audio_info_unk(os.path.join(save_dir, file_name[:-3]+'wav'), transcript)
+                    music_info=self.get_audio_info_unk(os.path.join(save_dir, file_name), transcript)
                 #print('music_info', music_info)
                 #langauge=whisper_transcriber.get_language(os.path.join(save_dir, file_name))
                     
@@ -372,7 +372,7 @@ if __name__ == '__main__':
     #analyzer.get_audio_info_unk("/Users/williamagnew/eclipse-workspace/gen-audio-ethics/Flume - Never Be Like You feat. Kai [Ly7uj0JwgKg].m4a", "Oh, can't you see I made, I made a mistake Please just look me in my face Tell me everything's okay Cause I got this")
     # parent_queue=manager.Queue()
     # child_queue=manager.Queue()
-    analyzer.get_audio_info_youtube("ZZzwHGqVw0c", options.save_loc, 120, 130, ["/m/04rlf"], None, options.info_transcribe)
+    # analyzer.get_audio_info_youtube("ZZzwHGqVw0c", options.save_loc, 120, 130, ["/m/04rlf"], None, options.info_transcribe)
     #
 
     with open(options.youtube_ids, newline='') as f:

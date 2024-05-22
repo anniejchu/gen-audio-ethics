@@ -347,10 +347,11 @@ if __name__ == '__main__':
     
     if options.info_transcribe:
         print("Getting video metadata")
+        whisper_transcriber=None
     else:
         print("Creating video transcriptions and getting artist info")
+        whisper_transcriber=Whisper_Transcriber()
     
-    whisper_transcriber=Whisper_Transcriber()
     analyzer=Transcription_Analyzer()
     
     ydl_opts = {

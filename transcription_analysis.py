@@ -372,7 +372,7 @@ if __name__ == '__main__':
     #analyzer.get_audio_info_unk("/Users/williamagnew/eclipse-workspace/gen-audio-ethics/Flume - Never Be Like You feat. Kai [Ly7uj0JwgKg].m4a", "Oh, can't you see I made, I made a mistake Please just look me in my face Tell me everything's okay Cause I got this")
     # parent_queue=manager.Queue()
     # child_queue=manager.Queue()
-    analyzer.get_audio_info_youtube("ZZzwHGqVw0c", options.save_loc, 120, 130, ["/m/015lz1"], None, options.info_transcribe)
+    analyzer.get_audio_info_youtube("ZZzwHGqVw0c", options.save_loc, 120, 130, ["/m/04rlf"], None, options.info_transcribe)
     #
 
     with open(options.youtube_ids, newline='') as f:

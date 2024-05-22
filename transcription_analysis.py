@@ -213,7 +213,7 @@ class Transcription_Analyzer:
                 
                 s_time=time.time()
                 transcript="sefsef sefsegdrg"
-                language="en"
+                langauge="en"
                 if transcript is None:
                     result=self.whisper_transcribe(whisper_pipe, os.path.join(save_dir, file_name))#
                     transcript=result['text']

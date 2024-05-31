@@ -21,12 +21,11 @@ import codecs
 # Lakh
 
 def find_midi(folder_path, all_text):
-    for search_file in os.listdir(folder_path):
+    for search_file in tqdm(os.listdir(folder_path)):
         new_folder_path=os.path.join(folder_path, search_file)
         if os.path.isdir(new_folder_path):
             all_text=find_midi(new_folder_path, all_text)
         elif search_file[-4:]==".mid":
-            print(new_folder_path)
             try:
                 pm = pretty_midi.PrettyMIDI(new_folder_path)
                 if len(pm.lyrics)>0:

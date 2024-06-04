@@ -27,7 +27,7 @@ for audio_info_file in tqdm(os.listdir(audio_info_file_dir)):
     # if len(audio_infos)>10000:
     #     break
 print('num_empty', num_empty)   
-pickle.dump(audio_infos, open("/Users/williamagnew/eclipse-workspace/audioset_info_collated.lz4", 'wb'))
+pickle.dump(audio_infos, open("/gscratch/scrubbed/wagnew2/audioset_info_collated.lz4", 'wb'))
             
 # Date
 

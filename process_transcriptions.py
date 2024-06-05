@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-audio_info_file_dir="/Users/williamagnew/Downloads/audioset_info/"
+audio_info_file_dir="/gscratch/scrubbed/wagnew2/audioset/audio/unbal_train/"
 
 audio_infos=[]
 num_empty=0
@@ -15,19 +15,16 @@ for audio_info_file in tqdm(os.listdir(audio_info_file_dir)):
             audio_info=pickle.load(os.path.join(audio_info_file_dir, audio_info_file))
         except EOFError:
             print(f'EOFError {audio_info_file}')
-        except Exception as e:
-            print('Error!', e)
         if isinstance(audio_info, dict):
-            if 'music_info' in audio_info and not audio_info['music_info'] is None and len(audio_info['music_info'])>0:
-                audio_infos.append(audio_info)
-                title=audio_info['yt_info']['title']
+            if 'transcript' in audio_info:
+                audio_infos.append((audio_info['transcript'], audio_info['text']))
         else:
             num_empty+=1
             #transcription=audio_info['transcript']
     # if len(audio_infos)>10000:
     #     break
 print('num_empty', num_empty)   
-pickle.dump(audio_infos, open("/gscratch/scrubbed/wagnew2/audioset_info_collated.lz4", 'wb'))
+pickle.dump(audio_infos, open("/gscratch/scrubbed/wagnew2/audioset_transcripts_collated.lz4", 'wb'))
             
 # Date
 

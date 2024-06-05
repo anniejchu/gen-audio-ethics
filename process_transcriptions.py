@@ -19,6 +19,7 @@ for audio_info_file in tqdm(os.listdir(audio_info_file_dir)):
             if 'music_info' in audio_info and not audio_info['music_info'] is None and len(audio_info['music_info'])>0:
                 audio_infos.append(audio_info)
                 title=audio_info['yt_info']['title']
+                print("found music")
         else:
             num_empty+=1
             #transcription=audio_info['transcript']

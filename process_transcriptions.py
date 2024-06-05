@@ -4,9 +4,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-audio_info_file_dir="/gscratch/scrubbed/wagnew2/audioset_info/"
+audio_info_file_dir="/gscratch/scrubbed/wagnew2/audioset/audio/unbal_train/"
 
-audio_infos=[]
+audio_infos={}
 num_empty=0
 for audio_info_file in tqdm(os.listdir(audio_info_file_dir)):
     if audio_info_file[-4:]=='.lz4':
@@ -17,7 +17,7 @@ for audio_info_file in tqdm(os.listdir(audio_info_file_dir)):
             print(f'EOFError {audio_info_file}')
         if isinstance(audio_info, dict):
             if 'music_info' in audio_info and not audio_info['music_info'] is None and len(audio_info['music_info'])>0:
-                audio_infos.append(audio_info)
+                audio_infos[audio_info_file[:-4]]=audio_info
                 title=audio_info['yt_info']['title']
                 print("found music")
         else:

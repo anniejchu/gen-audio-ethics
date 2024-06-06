@@ -51,7 +51,8 @@ for fid in tqdm(file_ids):
             over_2016+=1
             continue
     if fid in audioset_metas:
-        names.append(audioset_metas[fid].lower())
+        if not audioset_metas[fid] is None:
+            names.append(audioset_metas[fid].lower())
         
     names=[name.lower() for name in names]
     names=list(set(names))

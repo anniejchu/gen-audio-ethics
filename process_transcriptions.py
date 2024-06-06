@@ -17,12 +17,12 @@ for audio_info_file in tqdm(os.listdir(audio_info_file_dir)):
             print(f'EOFError {audio_info_file}')
             
         
-        if isinstance(audio_info, dict):
-            audio_infos[audio_info_file[:-4]]=audio_info['yt_info']['uploader']
+        # if isinstance(audio_info, dict):
+        #     audio_infos[audio_info_file[:-4]]=audio_info['yt_info']['uploader']
 
-            # if 'music_info' in audio_info and not audio_info['music_info'] is None and len(audio_info['music_info'])>0:
-            #     audio_infos[audio_info_file[:-4]]=audio_info
-            #     print("found music")
+        if 'music_info' in audio_info and not audio_info['music_info'] is None and len(audio_info['music_info'])>0:
+            audio_infos[audio_info_file[:-4]]=audio_info
+            print("found music")
         else:
             num_empty+=1
             #transcription=audio_info['transcript']

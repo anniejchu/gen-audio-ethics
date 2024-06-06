@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import re
 import compress_pickle as pickle
 from datetime import datetime
+from tqdm import tqdm
 
 def parse_credits(credits_list):
     names=[]

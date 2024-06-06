@@ -19,7 +19,7 @@ for audio_info_file in tqdm(os.listdir(audio_info_file_dir)):
         
         if isinstance(audio_info, dict):
             for k in audio_info['yt_info']:
-                print(k, audio_info[k])
+                print(k, audio_info['yt_info'][k])
                 print("-----------------------------------------------------------------------------------------------")
             
                 exit()

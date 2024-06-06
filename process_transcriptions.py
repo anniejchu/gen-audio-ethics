@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-audio_info_file_dir="/gscratch/scrubbed/wagnew2/audioset_info/"
+audio_info_file_dir="/gscratch/scrubbed/wagnew2/audioset/audio/unbal_train/"
 
 audio_infos={}
 num_empty=0
@@ -29,7 +29,7 @@ for audio_info_file in tqdm(os.listdir(audio_info_file_dir)):
     # if len(audio_infos)>10000:
     #     break
 print('num_empty', num_empty)   
-pickle.dump(audio_infos, open("/gscratch/scrubbed/wagnew2/audioset_metadata_collated.lz4", 'wb'))
+pickle.dump(audio_infos, open("/gscratch/scrubbed/wagnew2/audioset_info_collated.lz4", 'wb'))
             
 # Date
 

@@ -15,6 +15,7 @@ for audio_info_file in tqdm(os.listdir(audio_info_file_dir)):
             audio_info=pickle.load(os.path.join(audio_info_file_dir, audio_info_file))
         except EOFError:
             print(f'EOFError {audio_info_file}')
+            print("-----------------------------------------------------------------------------------------------")
             
         
         if isinstance(audio_info, dict):

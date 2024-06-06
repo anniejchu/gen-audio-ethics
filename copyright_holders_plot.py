@@ -29,8 +29,12 @@ for fid in tqdm(file_ids):
     names=[]
     
     if fid in audioset_song_infos:
-        release_date=datetime.strptime(audioset_song_infos[fid]['music_info']['top_hit_full_info']['song']['release_date'], '%Y-%m-%d').date()
-        if release_date.year<=2016:
+        try:
+            release_date=datetime.strptime(audioset_song_infos[fid]['music_info']['top_hit_full_info']['song']['release_date'], '%Y-%m-%d').date().year
+        except:
+            print("time parse error", audioset_song_infos[fid]['music_info']['top_hit_full_info']['song']['release_date'])
+            release_date=10000
+        if release_date<=2016:
             
             
             names.append(audioset_song_infos[fid]['music_info']['top_hit_full_info']['song']['artist_names'])

@@ -23,6 +23,7 @@ num_print=5
 printed=0
 all_names=[]
 file_ids=list(set(list(audioset_metas.keys())+list(audioset_song_infos.keys())))
+over_2016=0
 for fid in tqdm(file_ids):
     names=[]
     
@@ -42,6 +43,7 @@ for fid in tqdm(file_ids):
             names+=parse_credits(audioset_song_infos[fid]['music_info']['song_credits'])
             names+=parse_credits(audioset_song_infos[fid]['music_info']['xtra_credits'])
         else:
+            over_2016+=1
             continue
     if fid in audioset_metas:
         names.append(audioset_metas[fid]['yt_info']['uploader'])
@@ -49,7 +51,8 @@ for fid in tqdm(file_ids):
     names=[name.lower() for name in names]
     names=list(set(names))
     all_names+=names
-    
+
+print('num datasets over 2016', over_2016, 'total', len(audioset_song_infos))
 pickle.dump(all_names, open("/gscratch/scrubbed/wagnew2/all_artist_names_audioset.lz4", 'wb'))
     
         # for k in audioset_song_infos[fid]['music_info']:

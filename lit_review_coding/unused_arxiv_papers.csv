@@ -1,0 +1,225 @@
+﻿Query,ID,Paper,Link,ID,Dupe?,Source
+Music,188,A Comprehensive Survey for Evaluation Methodologies of AI-Generated Music,https://arxiv.org/abs/2308.13736,188,#N/A,arXiv
+Music,180,A Generalized Bandsplit Neural Network for Cinematic Audio Source Separation,https://arxiv.org/abs/2309.02539,180,#N/A,arXiv
+Music,177,A Long-Tail Friendly Representation Framework for Artist and Music Similarity,https://arxiv.org/abs/2309.04182,177,#N/A,arXiv
+Music,261,A Multi-Scale Attentive Transformer for Multi-Instrument Symbolic Music Generation,https://arxiv.org/abs/2305.16592,261,#N/A,arXiv
+Music,265,A study of audio mixing methods for piano transcription in violin-piano ensembles,https://arxiv.org/abs/2305.13758,265,#N/A,arXiv
+Music,200,An Autoethnographic Exploration of XAI in Algorithmic Composition,https://arxiv.org/abs/2308.06089,200,#N/A,arXiv
+Music,245,Anticipatory Music Transformer,https://arxiv.org/abs/2306.08620,245,#N/A,arXiv
+Music,298,AudioLM: a Language Modeling Approach to Audio Generation,https://arxiv.org/abs/2209.03143,298,#N/A,arXiv
+Music,199,BigWavGAN: A Wave-To-Wave Generative Adversarial Network for Music Super-Resolution,https://arxiv.org/abs/2308.06483,199,#N/A,arXiv
+Music,255,Blind Audio Bandwidth Extension: A Diffusion-Based Zero-Shot Approach,https://arxiv.org/abs/2306.01433,255,#N/A,arXiv
+Music,218,Brain2Music: Reconstructing Music from Human Brain Activity,https://arxiv.org/abs/2307.11078,218,#N/A,arXiv
+Music,286,Byte Pair Encoding for Symbolic Music,https://arxiv.org/abs/2301.11975,286,#N/A,arXiv
+Music,208,Choir Transformer: Generating Polyphonic Music with Relative Attention on Transformer,https://arxiv.org/abs/2308.02531,208,#N/A,arXiv
+Music,253,Controllable Lyrics-to-Melody Generation,https://arxiv.org/abs/2306.02613,253,#N/A,arXiv
+Music,211,DAVIS: High-Quality Audio-Visual Separation with Generative Diffusion Models,https://arxiv.org/abs/2308.00122,211,#N/A,arXiv
+Music,300,DEEPCHORUS: A Hybrid Model of Multi-scale Convolution and Self-attention for Chorus Detection,https://arxiv.org/abs/2202.06338,300,#N/A,arXiv
+Music,270,Discrete Diffusion Probabilistic Models for Symbolic Music Generation,https://arxiv.org/abs/2305.09489,270,#N/A,arXiv
+Music,262,Efficient Neural Music Generation,https://arxiv.org/abs/2305.15719,262,#N/A,arXiv
+Music,198,EMID: An Emotional Aligned Dataset in Audio-Visual Modality,https://arxiv.org/abs/2308.07622,198,#N/A,arXiv
+Music,236,EmoGen: Eliminating Subjective Bias in Emotional Music Generation,https://arxiv.org/abs/2307.01229,236,#N/A,arXiv
+Music,251,Emotion-Conditioned Melody Harmonization with Hierarchical Variational Autoencoder,https://arxiv.org/abs/2306.03718,251,#N/A,arXiv
+Music,231,Emotion-Guided Music Accompaniment Generation Based on Variational Autoencoder,https://arxiv.org/abs/2307.04015,231,#N/A,arXiv
+Music,215,Emotion4MIDI: a Lyrics-based Emotion-Labeled Symbolic Music Dataset,https://arxiv.org/abs/2307.14783,215,#N/A,arXiv
+Music,284,ERNIE-Music: Text-to-Waveform Music Generation with Diffusion Models,https://arxiv.org/abs/2302.04456,284,#N/A,arXiv
+Music,192,Exploiting Time-Frequency Conformers for Music Audio Enhancement,https://arxiv.org/abs/2308.12599,192,#N/A,arXiv
+Music,176,Exploring Domain-Specific Enhancements for a Neural Foley Synthesizer,https://arxiv.org/abs/2309.04641,176,#N/A,arXiv
+Music,196,Exploring Sampling Techniques for Generating Melodies with a Transformer Language Model,https://arxiv.org/abs/2308.09454,196,#N/A,arXiv
+Music,277,Exploring Softly Masked Language Modelling for Controllable Symbolic Music Generation,https://arxiv.org/abs/2305.03530,277,#N/A,arXiv
+Music,201,Exploring XAI for the Arts: Explaining Latent Space in Generative Music,https://arxiv.org/abs/2308.05496,201,#N/A,arXiv
+Music,301,FIGARO: Generating Symbolic Music with Fine-Grained Artistic Control,https://arxiv.org/abs/2201.10936,301,#N/A,arXiv
+Music,207,From Discrete Tokens to High-Fidelity Audio Using Multi-Band Diffusion,https://arxiv.org/abs/2308.02560,207,#N/A,arXiv
+Music,183,FSD: An Initial Chinese Dataset for Fake Song Detection,https://arxiv.org/abs/2309.02232,183,#N/A,arXiv
+Music,267,Generating coherent comic with rich story using ChatGPT and Stable Diffusion,https://arxiv.org/abs/2305.11067,267,#N/A,arXiv
+Music,181,Generating Realistic Images from In-the-wild Sounds,https://arxiv.org/abs/2309.02405,181,#N/A,arXiv
+Music,281,Generating symbolic music using diffusion models,https://arxiv.org/abs/2303.08385,281,#N/A,arXiv
+Music,279,Generative Disco: Text-to-Video Generation for Music Visualization,https://arxiv.org/abs/2304.08551,279,#N/A,arXiv
+Music,268,GETMusic: Generating Any Music Tracks with a Unified Representation and Diffusion Framework,https://arxiv.org/abs/2305.10841,268,#N/A,arXiv
+Music,263,Graph Meets LLM: A Novel Approach to Collaborative Filtering for Robust Conversational Understanding,https://arxiv.org/abs/2305.14449,263,#N/A,arXiv
+Music,214,Graph-based Polyphonic Multitrack Music Generation,https://arxiv.org/abs/2307.14928,214,#N/A,arXiv
+Music,247,HiddenSinger: High-Quality Singing Voice Synthesis via Neural Audio Codec and Latent Diffusion Models,https://arxiv.org/abs/2306.06814,247,#N/A,arXiv
+Music,295,Hierarchical quantum circuit representations for neural architecture search,https://arxiv.org/abs/2210.15073,295,#N/A,arXiv
+Music,248,High-Fidelity Audio Compression with Improved RVQGAN,https://arxiv.org/abs/2306.06546,248,#N/A,arXiv
+Music,237,HypeRS: Building a Hypergraph-driven ensemble Recommender System,https://arxiv.org/abs/2306.12800,237,#N/A,arXiv
+Music,210,Inaudible Adversarial Perturbation: Manipulating the Recognition of User Speech in Real Time,https://arxiv.org/abs/2308.01040,210,#N/A,arXiv
+Music,217,IteraTTA: An interface for exploring both text prompts and audio priors in generating music with text-to-audio models,https://arxiv.org/abs/2307.13005,217,#N/A,arXiv
+Music,222,JAZZVAR: A Dataset of Variations found within Solo Piano Performances of Jazz Standards for Music Overpainting,https://arxiv.org/abs/2307.09670,222,#N/A,arXiv
+Music,204,JEN-1: Text-Guided Universal Music Generation with Omnidirectional Diffusion Models,https://arxiv.org/abs/2308.04729,204,#N/A,arXiv
+Music,244,Language-Guided Music Recommendation for Video via Prompt Analogies,https://arxiv.org/abs/2306.09327,244,#N/A,arXiv
+Music,235,Large Language and Text-to-3D Models for Engineering Design Optimization,https://arxiv.org/abs/2307.01230,235,#N/A,arXiv
+Music,229,LaunchpadGPT: Language Model as Music Visualization Designer on Launchpad,https://arxiv.org/abs/2307.04827,229,#N/A,arXiv
+Music,283,Learning Interpretable Low-dimensional Representation via Physical Symmetry,https://arxiv.org/abs/2302.10890,283,#N/A,arXiv
+Music,234,LOAF-M2L: Joint Learning of Wording and Formatting for Singable Melody-to-Lyric Generation,https://arxiv.org/abs/2307.02146,234,#N/A,arXiv
+Music,278,Long-Term Rhythmic Video Soundtracker,https://arxiv.org/abs/2305.01319,278,#N/A,arXiv
+Music,282,Low-Complexity Audio Embedding Extractors,https://arxiv.org/abs/2303.01879,282,#N/A,arXiv
+Music,212,LP-MusicCaps: LLM-Based Pseudo Music Captioning,https://arxiv.org/abs/2307.16372,212,#N/A,arXiv
+Music,185,MAGMA: Music Aligned Generative Motion Autodecoder,https://arxiv.org/abs/2309.01202,185,#N/A,arXiv
+Music,240,MARBLE: Music Audio Representation Benchmark for Universal Evaluation,https://arxiv.org/abs/2306.10548,240,#N/A,arXiv
+Music,184,MDSC: Towards Evaluating the Style Consistency Between Music and Dance,https://arxiv.org/abs/2309.01340,184,#N/A,arXiv
+Music,287,Moûsai: Text-to-Music Generation with Long-Context Latent Diffusion,https://arxiv.org/abs/2301.11757,287,#N/A,arXiv
+Music,285,Multi-Source Diffusion Models for Simultaneous Music Generation and Separation,https://arxiv.org/abs/2302.02257,285,#N/A,arXiv
+Music,299,Multitrack Music Transformer,https://arxiv.org/abs/2207.06983,299,#N/A,arXiv
+Music,257,MuseCoco: Generating Symbolic Music from Text,https://arxiv.org/abs/2306.00110,257,#N/A,arXiv
+Music,195,Music Understanding LLaMA: Advancing Text-to-Music Generation with Question Answering and Captioning,https://arxiv.org/abs/2308.11276,195,#N/A,arXiv
+Music,297,Music-to-Text Synaesthesia: Generating Descriptive Text from Music Recordings,https://arxiv.org/abs/2210.00434,297,#N/A,arXiv
+Music,194,MusicJam: Visualizing Music Insights via Generated Narrative Illustrations,https://arxiv.org/abs/2308.11329,194,#N/A,arXiv
+Music,209,MusicLDM: Enhancing Novelty in Text-to-Music Generation Using Beat-Synchronous Mixup Strategies,https://arxiv.org/abs/2308.01546,209,#N/A,arXiv
+Music,259,Neural modeling of magnetic tape recorders,https://arxiv.org/abs/2305.16862,259,#N/A,arXiv
+Music,223,NoiseBandNet: Controllable Time-Varying Neural Synthesis of Sound Effects Using Filterbanks,https://arxiv.org/abs/2307.08007,223,#N/A,arXiv
+Music,228,On the Effectiveness of Speech Self-supervised Learning for Music,https://arxiv.org/abs/2307.05161,228,#N/A,arXiv
+Music,182,PESTO: Pitch Estimation with Self-supervised Transposition-equivariant Objective,https://arxiv.org/abs/2309.02265,182,#N/A,arXiv
+Music,303,Points2Sound: From mono to binaural audio using 3D point cloud scenes,https://arxiv.org/abs/2104.12462,303,#N/A,arXiv
+Music,221,Polyffusion: A Diffusion Model for Polyphonic Score Generation with Internal and External Controls,https://arxiv.org/abs/2307.10304,221,#N/A,arXiv
+Music,226,ProgGP: From GuitarPro Tablature Neural Generation To Progressive Metal Production,https://arxiv.org/abs/2307.05328,226,#N/A,arXiv
+Music,219,Progressive distillation diffusion for raw music generation,https://arxiv.org/abs/2307.10994,219,#N/A,arXiv
+Music,254,Q&A: Query-Based Representation Learning for Multi-Track Symbolic Music re-Arrangement,https://arxiv.org/abs/2306.01635,254,#N/A,arXiv
+Music,249,Reconstructing Human Expressiveness in Piano Performances with a Transformer Network,https://arxiv.org/abs/2306.06040,249,#N/A,arXiv
+Music,272,REMAST: Real-time Emotion-based Music Arrangement with Soft Transition,https://arxiv.org/abs/2305.08029,272,#N/A,arXiv
+Music,269,RMSSinger: Realistic-Music-Score based Singing Voice Synthesis,https://arxiv.org/abs/2305.10686,269,#N/A,arXiv
+Music,296,Robust One-Shot Singing Voice Conversion,https://arxiv.org/abs/2210.11096,296,#N/A,arXiv
+Music,302,Self-Supervised Beat Tracking in Musical Signals with Polyphonic Contrastive Learning,https://arxiv.org/abs/2201.01771,302,#N/A,arXiv
+Music,271,Self-Supervised Pretraining on Paired Sequences of fMRI Data for Transfer Learning to Brain Decoding Tasks,https://arxiv.org/abs/2305.09057,271,#N/A,arXiv
+Music,202,Separate Anything You Describe,https://arxiv.org/abs/2308.05037,202,#N/A,arXiv
+Music,266,Sequential Transfer Learning to Decode Heard and Imagined Timbre from fMRI Data,https://arxiv.org/abs/2305.13226,266,#N/A,arXiv
+Music,227,ShredGP: Guitarist Style-Conditioned Tablature Generation,https://arxiv.org/abs/2307.05324,227,#N/A,arXiv
+Music,250,Simple and Controllable Music Generation,https://arxiv.org/abs/2306.05284,250,#N/A,arXiv
+Music,224,SnakeSynth: New Interactions for Generative Audio Synthesis,https://arxiv.org/abs/2307.05830,224,#N/A,arXiv
+Music,260,Songs Across Borders: Singable and Controllable Neural Lyric Translation,https://arxiv.org/abs/2305.16816,260,#N/A,arXiv
+Music,187,Symbolic & Acoustic: Multi-domain Music Emotion Modeling for Instrumental Music,https://arxiv.org/abs/2308.14317,187,#N/A,arXiv
+Music,275,Tackling Interpretability in Audio Classification Networks with Non-negative Matrix Factorization,https://arxiv.org/abs/2305.07132,275,#N/A,arXiv
+Music,288,Talk the Walk: Synthetic Data Generation for Conversational Music Recommendation,https://arxiv.org/abs/2301.11489,288,#N/A,arXiv
+Music,242,Taming Diffusion Models for Music-driven Conducting Motion Generation,https://arxiv.org/abs/2306.10065,242,#N/A,arXiv
+Music,280,The language of sounds unheard: Exploring musical timbre semantics of large language models,https://arxiv.org/abs/2304.07830,280,#N/A,arXiv
+Music,241,"The pop song generator: designing an online course to teach collaborative, creative AI",https://arxiv.org/abs/2306.10069,241,#N/A,arXiv
+Music,186,Towards Contrastive Learning in Music Video Domain,https://arxiv.org/abs/2309.00347,186,#N/A,arXiv
+Music,238,Towards Open-World Recommendation with Knowledge Augmentation from Large Language Models,https://arxiv.org/abs/2306.10933,238,#N/A,arXiv
+Music,233,Track Mix Generation on Music Streaming Services using Transformers,https://arxiv.org/abs/2307.03045,233,#N/A,arXiv
+Music,220,Transfer Learning and Bias Correction with Pre-trained Audio Embeddings,https://arxiv.org/abs/2307.10834,220,#N/A,arXiv
+Music,256,Transfer Learning for Underrepresented Music Generation,https://arxiv.org/abs/2306.00281,256,#N/A,arXiv
+Music,290,TunesFormer: Forming Irish Tunes with Control Codes by Bar Patching,https://arxiv.org/abs/2301.02884,290,#N/A,arXiv
+Music,213,UniBriVL: Robust Universal Representation and Generation of Audio Driven Diffusion Models,https://arxiv.org/abs/2307.15898,213,#N/A,arXiv
+Music,273,Unsupervised Melody-Guided Lyrics Generation,https://arxiv.org/abs/2305.07760,273,#N/A,arXiv
+Music,258,Unsupervised Melody-to-Lyric Generation,https://arxiv.org/abs/2305.19228,258,#N/A,arXiv
+Music,276,V2Meow: Meowing to the Visual Beat via Video-to-Music Generation,https://arxiv.org/abs/2305.06594,276,#N/A,arXiv
+Music,230,VampNet: Music Generation via Masked Acoustic Token Modeling,https://arxiv.org/abs/2307.04686,230,#N/A,arXiv
+Music,293,"Video Background Music Generation: Dataset, Method and Evaluation",https://arxiv.org/abs/2211.11248,293,#N/A,arXiv
+Music,239,Visually-Guided Sound Source Separation with Audio-Visual Predictive Coding,https://arxiv.org/abs/2306.10684,239,#N/A,arXiv
+Music,216,WavJourney: Compositional Audio Creation with Large Language Models,https://arxiv.org/abs/2307.14335,216,#N/A,arXiv
+Music,264,When the Music Stops: Tip-of-the-Tongue Retrieval for Music,https://arxiv.org/abs/2305.14072,264,#N/A,arXiv
+Music,232,Whisper-AT: Noise-Robust Automatic Speech Recognizers are Also Strong General Audio Event Taggers,https://arxiv.org/abs/2307.03183,232,#N/A,arXiv
+Speech,626,A cross-talk robust multichannel VAD model for multiparty agent interactions trained using synthetic re-recordings,https://arxiv.org/abs/2402.09797,626,#N/A,arXiv
+Speech,621,A Multi-Aspect Framework for Counter Narrative Evaluation using Large Language Models,https://arxiv.org/abs/2402.11676,621,#N/A,arXiv
+Speech,493,A Novel Audio Representation for Music Genre Identification in MIR,https://arxiv.org/abs/2404.01058,493,#N/A,arXiv
+Speech,687,A Proactive and Dual Prevention Mechanism against Illegal Song Covers empowered by Singing Voice Conversion,https://arxiv.org/abs/2401.17133,687,#N/A,arXiv
+Speech,587,A SOUND APPROACH: Using Large Language Models to generate audio descriptions for egocentric text-audio retrieval,https://arxiv.org/abs/2402.19106,587,#N/A,arXiv
+Speech,482,A Unified Editing Method for Co-Speech Gesture Generation via Diffusion Inversion,https://arxiv.org/abs/2404.02411,482,#N/A,arXiv
+Speech,661,Absolute convergence and error thresholds in non-active adaptive sampling,https://arxiv.org/abs/2402.02522,661,#N/A,arXiv
+Speech,507,ACES: Evaluating Automated Audio Captioning Models on the Semantics of Sounds,https://arxiv.org/abs/2403.18572,507,#N/A,arXiv
+Speech,613,Acknowledgment of Emotional States: Generating Validating Responses for Empathetic Dialogue,https://arxiv.org/abs/2402.12770,613,#N/A,arXiv
+Speech,659,Adversarial Data Augmentation for Robust Speaker Verification,https://arxiv.org/abs/2402.02699,659,#N/A,arXiv
+Speech,702,Adversarial speech for voice privacy protection from Personalized Speech generation,https://arxiv.org/abs/2401.11857,702,#N/A,arXiv
+Speech,622,Ain't Misbehavin' -- Using LLMs to Generate Expressive Robot Behavior in Conversations with the Tabletop Robot Haru,https://arxiv.org/abs/2402.11571,622,#N/A,arXiv
+Speech,601,All Thresholds Barred: Direct Estimation of Call Density in Bioacoustic Data,https://arxiv.org/abs/2402.15360,601,#N/A,arXiv
+Speech,676,An Analysis of the Variance of Diffusion-based Speech Enhancement,https://arxiv.org/abs/2402.00811,676,#N/A,arXiv
+Speech,596,An Automated End-to-End Open-Source Software for High-Quality Text-to-Speech Dataset Generation,https://arxiv.org/abs/2402.16380,596,#N/A,arXiv
+Speech,598,AVI-Talking: Learning Audio-Visual Instructions for Expressive 3D Talking Face Generation,https://arxiv.org/abs/2402.16124,598,#N/A,arXiv
+Speech,519,AVicuna: Audio-Visual LLM with Interleaver and Context-Boundary Alignment for Temporal Referential Dialogue,https://arxiv.org/abs/2403.16276,519,#N/A,arXiv
+Speech,677,BATON: Aligning Text-to-Audio Model with Human Preference Feedback,https://arxiv.org/abs/2402.00744,677,#N/A,arXiv
+Speech,619,Bayesian Parameter-Efficient Fine-Tuning for Overcoming Catastrophic Forgetting,https://arxiv.org/abs/2402.12220,619,#N/A,arXiv
+Speech,701,Benchmarking Large Multimodal Models against Common Corruptions,https://arxiv.org/abs/2401.11943,701,#N/A,arXiv
+Speech,606,CEV-LM: Controlled Edit Vector Language Model for Shaping Natural Language Generations,https://arxiv.org/abs/2402.14290,606,#N/A,arXiv
+Speech,508,Chinese Offensive Language Detection:Current Status and Future Directions,https://arxiv.org/abs/2403.18314,508,#N/A,arXiv
+Speech,477,CLaM-TTS: Improving Neural Codec Language Model for Zero-Shot Text-to-Speech,https://arxiv.org/abs/2404.02781,477,#N/A,arXiv
+Speech,496,CM-TTS: Enhancing Real Time Text-to-Speech Synthesis Efficiency through Weighted Samplers and Consistency Models,https://arxiv.org/abs/2404.00569,496,#N/A,arXiv
+Speech,487,Co-Speech Gesture Video Generation via Motion-Decoupled Diffusion Model,https://arxiv.org/abs/2404.01862,487,#N/A,arXiv
+Speech,647,CochCeps-Augment: A Novel Self-Supervised Contrastive Learning Using Cochlear Cepstrum-based Masking for Speech Emotion Recognition,https://arxiv.org/abs/2402.06923,647,#N/A,arXiv
+Speech,612,Comparison of Conventional Hybrid and CTC/Attention Decoders for Continuous Visual Speech Recognition,https://arxiv.org/abs/2402.13004,612,#N/A,arXiv
+Speech,696,Comparison of parameters of vowel sounds of russian and english languages,https://arxiv.org/abs/2401.14890,696,#N/A,arXiv
+Speech,684,Computation and Parameter Efficient Multi-Modal Fusion Transformer for Cued Speech Recognition,https://arxiv.org/abs/2401.17604,684,#N/A,arXiv
+Speech,484,Constrained Robotic Navigation on Preferred Terrains Using LLMs and Speech Instruction: Exploiting the Power of Adverbs,https://arxiv.org/abs/2404.02294,484,#N/A,arXiv
+Speech,691,Continuous Target Speech Extraction: Enhancing Personalized Diarization and Extraction on Complex Recordings,https://arxiv.org/abs/2401.15993,691,#N/A,arXiv
+Speech,509,ConvoFusion: Multi-Modal Conversational Diffusion for Co-Speech Gesture Synthesis,https://arxiv.org/abs/2403.17936,509,#N/A,arXiv
+Speech,475,Decentralised Moderation for Interoperable Social Networks: A Conversation-based Approach for Pleroma and the Fediverse,https://arxiv.org/abs/2404.03048,475,#N/A,arXiv
+Speech,589,Decomposed Prompting: Unveiling Multilingual Linguistic Structure Knowledge in English-Centric Large Language Models,https://arxiv.org/abs/2402.18397,589,#N/A,arXiv
+Speech,672,Del Visual al Auditivo: Sonorización de Escenas Guiada por Imagen,https://arxiv.org/abs/2402.01385,672,#N/A,arXiv
+Speech,660,Description on IEEE ICME 2024 Grand Challenge: Semi-supervised Acoustic Scene Classification under Domain Shift,https://arxiv.org/abs/2402.02694,660,#N/A,arXiv
+Speech,512,Detection of Deepfake Environmental Audio,https://arxiv.org/abs/2403.17529,512,#N/A,arXiv
+Speech,625,Diffusion Models for Audio Restoration,https://arxiv.org/abs/2402.09821,625,55,arXiv
+Speech,664,Digits micro-model for accurate and secure transactions,https://arxiv.org/abs/2402.01931,664,#N/A,arXiv
+Speech,689,Distinguishing Fictional Voices: a Study of Authorship Verification Models for Quotation Attribution,https://arxiv.org/abs/2401.16968,689,#N/A,arXiv
+Speech,627,Domain Adaptation for Contrastive Audio-Language Models,https://arxiv.org/abs/2402.09585,627,#N/A,arXiv
+Speech,610,DrBenchmark: A Large Language Understanding Evaluation Benchmark for French Biomedical Domain,https://arxiv.org/abs/2402.13432,610,#N/A,arXiv
+Speech,489,Effective internal language model training and fusion for factorized transducer model,https://arxiv.org/abs/2404.01716,489,#N/A,arXiv
+Speech,679,Efficient Training Spiking Neural Networks with Parallel Spiking Unit,https://arxiv.org/abs/2402.00449,679,#N/A,arXiv
+Speech,499,ELITR-Bench: A Meeting Assistant Benchmark for Long-Context Language Models,https://arxiv.org/abs/2403.20262,499,#REF!,arXiv
+Speech,611,EMO-SUPERB: An In-depth Look at Speech Emotion Recognition,https://arxiv.org/abs/2402.13018,611,#N/A,arXiv
+Speech,498,Emotion-Anchored Contrastive Learning Framework for Emotion Recognition in Conversation,https://arxiv.org/abs/2403.20289,498,#N/A,arXiv
+Speech,703,Empowering Communication: Speech Technology for Indian and Western Accents through AI-powered Speech Synthesis,https://arxiv.org/abs/2401.11771,703,#N/A,arXiv
+Speech,663,Enhance Reasoning for Large Language Models in the Game Werewolf,https://arxiv.org/abs/2402.02330,663,#N/A,arXiv
+Speech,688,Enhanced Sound Event Localization and Detection in Real 360-degree audio-visual soundscapes,https://arxiv.org/abs/2401.17129,688,#N/A,arXiv
+Speech,657,Enhancing the Stability of LLM-based Speech Generation Systems through Self-Supervised Representations,https://arxiv.org/abs/2402.03407,657,#N/A,arXiv
+Speech,658,Exploring Federated Self-Supervised Learning for General Purpose Audio Understanding,https://arxiv.org/abs/2402.02889,658,#N/A,arXiv
+Speech,588,Extending Multilingual Speech Synthesis to 100+ Languages without Transcribed Data,https://arxiv.org/abs/2402.18932,588,#N/A,arXiv
+Speech,594,Extreme Encoder Output Frame Rate Reduction: Improving Computational Latencies of Large End-to-End Models,https://arxiv.org/abs/2402.17184,594,#N/A,arXiv
+Speech,674,"Generation, Distillation and Evaluation of Motivational Interviewing-Style Reflections with a Foundational Language Model",https://arxiv.org/abs/2402.01051,674,#N/A,arXiv
+Speech,615,Guiding the underwater acoustic target recognition with interpretable contrastive learning,https://arxiv.org/abs/2402.12658,615,#N/A,arXiv
+Speech,491,Humane Speech Synthesis through Zero-Shot Emotion and Disfluency Generation,https://arxiv.org/abs/2404.01339,491,#N/A,arXiv
+Speech,700,Improving Design of Input Condition Invariant Speech Enhancement,https://arxiv.org/abs/2401.14271,700,#N/A,arXiv
+Speech,522,InternVideo2: Scaling Video Foundation Models for Multimodal Video Understanding,https://arxiv.org/abs/2403.15377,522,#N/A,arXiv
+Speech,653,It's Never Too Late: Fusing Acoustic Information into Large Language Models for Automatic Speech Recognition,https://arxiv.org/abs/2402.05457,653,#N/A,arXiv
+Speech,503,JEP-KD: Joint-Embedding Predictive Architecture Based Knowledge Distillation for Visual Speech Recognition,https://arxiv.org/abs/2403.18843,503,#N/A,arXiv
+Speech,695,LaMI: Large Language Models for Multi-Modal Human-Robot Interaction,https://arxiv.org/abs/2401.15174,695,#N/A,arXiv
+Speech,479,Leveraging the Interplay Between Syntactic and Acoustic Cues for Optimizing Korean TTS Pause Formation,https://arxiv.org/abs/2404.02592,479,#N/A,arXiv
+Speech,514,Low-Latency Neural Speech Phase Prediction based on Parallel Estimation Architecture and Anti-Wrapping Losses for Speech Generation Tasks,https://arxiv.org/abs/2403.17378,514,#N/A,arXiv
+Speech,513,MapGuide: A Simple yet Effective Method to Reconstruct Continuous Language from Brain Activities,https://arxiv.org/abs/2403.17516,513,#N/A,arXiv
+Speech,494,Measuring audio prompt adherence with distribution-based embedding distances,https://arxiv.org/abs/2404.00775,494,#N/A,arXiv
+Speech,692,Media2Face: Co-speech Facial Animation Generation With Multi-Modality Guidance,https://arxiv.org/abs/2401.15687,692,#N/A,arXiv
+Speech,608,MM-Soc: Benchmarking Multimodal Large Language Models in Social Media Platforms,https://arxiv.org/abs/2402.14154,608,#N/A,arXiv
+Speech,629,MobileSpeech: A Fast and High-Fidelity Framework for Mobile Zero-Shot Text-to-Speech,https://arxiv.org/abs/2402.09378,629,#N/A,arXiv
+Speech,662,Modeling of learning curves with applications to pos tagging,https://arxiv.org/abs/2402.02515,662,#N/A,arXiv
+Speech,500,NaijaHate: Evaluating Hate Speech Detection on Nigerian Twitter Using Representative Data,https://arxiv.org/abs/2403.19260,500,#REF!,arXiv
+Speech,665,Natural language guidance of high-fidelity text-to-speech with synthetic annotations,https://arxiv.org/abs/2402.01912,665,#N/A,arXiv
+Speech,520,NaturalTurn: A Method to Segment Transcripts into Naturalistic Conversational Turns,https://arxiv.org/abs/2403.15615,520,#N/A,arXiv
+Speech,670,Objective and subjective evaluation of speech enhancement methods in the UDASE task of the 7th CHiME challenge,https://arxiv.org/abs/2402.01413,670,#N/A,arXiv
+Speech,523,On Zero-Shot Counterspeech Generation by LLMs,https://arxiv.org/abs/2403.14938,523,#N/A,arXiv
+Speech,515,Outcome-Constrained Large Language Models for Countering Hate Speech,https://arxiv.org/abs/2403.17146,515,#N/A,arXiv
+Speech,631,Overview of the L3DAS23 Challenge on Audio-Visual Extended Reality,https://arxiv.org/abs/2402.09245,631,#N/A,arXiv
+Speech,616,"OWSM-CTC: An Open Encoder-Only Speech Foundation Model for Speech Recognition, Translation, and Language Identification",https://arxiv.org/abs/2402.12654,616,#N/A,arXiv
+Speech,704,P2DT: Mitigating Forgetting in task-incremental Learning with progressive prompt Decision Transformer,https://arxiv.org/abs/2401.11666,704,#N/A,arXiv
+Speech,604,PeriodGrad: Towards Pitch-Controllable Neural Vocoder Based on a Diffusion Probabilistic Model,https://arxiv.org/abs/2402.14692,604,#N/A,arXiv
+Speech,480,PhonologyBench: Evaluating Phonological Skills of Large Language Models,https://arxiv.org/abs/2404.02456,480,#N/A,arXiv
+Speech,686,Proactive Detection of Voice Cloning with Localized Watermarking,https://arxiv.org/abs/2401.17264,686,#N/A,arXiv
+Speech,478,PromptCodec: High-Fidelity Neural Speech Codec using Disentangled Representation Learning based Adaptive Feature-aware Prompt Encoders,https://arxiv.org/abs/2404.02702,478,#N/A,arXiv
+Speech,678,Prosody in Cascade and Direct Speech-to-Text Translation: a case study on Korean Wh-Phrases,https://arxiv.org/abs/2402.00632,678,#N/A,arXiv
+Speech,504,Real Acoustic Fields: An Audio-Visual Room Acoustics Dataset and Benchmark,https://arxiv.org/abs/2403.18821,504,#N/A,arXiv
+Speech,524,Regularized Adaptive Momentum Dual Averaging with an Efficient Inexact Subproblem Solver for Training Structured Neural Network,https://arxiv.org/abs/2403.14398,524,#N/A,arXiv
+Speech,490,Release of Pre-Trained Models for the Japanese Language,https://arxiv.org/abs/2404.01657,490,#N/A,arXiv
+Speech,666,Retrieval Augmented End-to-End Spoken Dialog Models,https://arxiv.org/abs/2402.01828,666,#N/A,arXiv
+Speech,502,Robust Active Speaker Detection in Noisy Environments,https://arxiv.org/abs/2403.19002,502,#N/A,arXiv
+Speech,591,Seeing and Hearing: Open-domain Visual-Audio Generation with Diffusion Latent Aligners,https://arxiv.org/abs/2402.17723,591,#N/A,arXiv
+Speech,614,SingVisio: Visual Analytics of Diffusion Model for Singing Voice Conversion,https://arxiv.org/abs/2402.12660,614,#N/A,arXiv
+Speech,624,Speaking in Wavelet Domain: A Simple and Efficient Approach to Speed up Speech Diffusion Model,https://arxiv.org/abs/2402.10642,624,#N/A,arXiv
+Speech,646,Speech motion anomaly detection via cross-modal translation of 4D motion fields from tagged MRI,https://arxiv.org/abs/2402.06984,646,#N/A,arXiv
+Speech,690,SpeechBERTScore: Reference-Aware Automatic Evaluation of Speech Generation Leveraging NLP Evaluation Metrics,https://arxiv.org/abs/2401.16812,690,#N/A,arXiv
+Speech,673,STAA-Net: A Sparse and Transferable Adversarial Attack for Speech Emotion Recognition,https://arxiv.org/abs/2402.01227,673,#N/A,arXiv
+Speech,617,StyleDubber: Towards Multi-Scale Style Learning for Movie Dubbing,https://arxiv.org/abs/2402.12636,617,#N/A,arXiv
+Speech,526,SynerMix: Synergistic Mixup Solution for Enhanced Intra-Class Cohesion and Inter-Class Separability in Image Classification,https://arxiv.org/abs/2403.14137,526,#N/A,arXiv
+Speech,510,Synthesizing Soundscapes: Leveraging Text-to-Audio Models for Environmental Sound Classification,https://arxiv.org/abs/2403.17864,510,#N/A,arXiv
+Speech,697,Toward Practical Automatic Speech Recognition and Post-Processing: a Call for Explainable Error Benchmark Guideline,https://arxiv.org/abs/2401.14625,697,#N/A,arXiv
+Speech,476,Towards a Fully Interpretable and More Scalable RSA Model for Metaphor Understanding,https://arxiv.org/abs/2404.02983,476,#N/A,arXiv
+Speech,501,Towards Multimodal Video Paragraph Captioning Models Robust to Missing Modality,https://arxiv.org/abs/2403.19221,501,#N/A,arXiv
+Speech,518,Training Generative Adversarial Network-Based Vocoder with Limited Data Using Augmentation-Conditional Discriminator,https://arxiv.org/abs/2403.16464,518,#N/A,arXiv
+Speech,669,TrICy: Trigger-guided Data-to-text Generation with Intent aware Attention-Copy,https://arxiv.org/abs/2402.01714,669,#N/A,arXiv
+Speech,483,Two Heads are Better than One: Nested PoE for Robust Defense Against Multi-Backdoors,https://arxiv.org/abs/2404.02356,483,#N/A,arXiv
+Speech,474,UniAV: Unified Audio-Visual Perception for Multi-Task Video Localization,https://arxiv.org/abs/2404.03179,474,#N/A,arXiv
+Speech,525,Unified Static and Dynamic Network: Efficient Temporal Filtering for Video Grounding,https://arxiv.org/abs/2403.14174,525,#N/A,arXiv
+Speech,586,Unraveling Adversarial Examples against Speaker Identification -- Techniques for Attack Detection and Victim Model Classification,https://arxiv.org/abs/2402.19355,586,#N/A,arXiv
+Speech,635,Unrestricted Global Phase Bias-Aware Single-channel Speech Enhancement with Conformer-based Metric GAN,https://arxiv.org/abs/2402.08252,635,#N/A,arXiv
+Speech,699,VALL-T: Decoder-Only Generative Transducer for Robust and Decoding-Controllable Text-to-Speech,https://arxiv.org/abs/2401.14321,699,#N/A,arXiv
+Speech,656,Vector Approximate Message Passing With Arbitrary I.I.D. Noise Priors,https://arxiv.org/abs/2402.04111,656,#N/A,arXiv
+Speech,495,WavLLM: Towards Robust and Adaptive Speech Large Language Model,https://arxiv.org/abs/2404.00656,495,#N/A,arXiv
+Speech,488,Weakly-supervised Audio Separation via Bi-modal Semantic Similarity,https://arxiv.org/abs/2404.01740,488,#N/A,arXiv
+Speech,595,What Do Language Models Hear? Probing for Auditory Representations in Language Models,https://arxiv.org/abs/2402.16998,595,#N/A,arXiv
+Speech,682,What Do Self-Supervised Speech and Speaker Models Learn? New Findings From a Cross Model Layer-Wise Analysis,https://arxiv.org/abs/2401.17632,682,#N/A,arXiv
+Speech,486,Zero-Shot Multi-Lingual Speaker Verification in Clinical Trials,https://arxiv.org/abs/2404.01981,486,#N/A,arXiv

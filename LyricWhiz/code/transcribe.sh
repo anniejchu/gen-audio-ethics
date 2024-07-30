@@ -1,5 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=myjob
+#SBATCH --requeue
 #SBATCH --array=0-4
 #SBATCH --output=array_test_%A_%a.out
 #SBATCH --error=array_test_%A_%a.error

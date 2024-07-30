@@ -7,6 +7,12 @@ import compress_pickle as pickle
 from datetime import datetime
 from tqdm import tqdm
 
+names=pickle.load("/media/willie/1caf5422-4135-4f2c-9619-c44041b51146/audio_data/processed/all_artist_names_audioset.lz4")
+names=list(set(names))
+with open('/media/willie/1caf5422-4135-4f2c-9619-c44041b51146/audio_data/processed/all_artist_names_audioset.txt', 'w') as f:
+    for line in names:
+        f.write(f"{line}\n")
+u=0
 def parse_credits(credits_list):
     names=[]
     for credits_dict in credits_list:

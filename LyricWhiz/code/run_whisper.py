@@ -85,31 +85,32 @@ def transcribe_and_save(whisper_model, panns_model, args):
 
     for file in tqdm(audio_files):
         output_file = os.path.join(args.output_dir, os.path.relpath(file, args.input_dir))
-        os.makedirs(os.path.dirname(output_file), exist_ok=True)
-        result = {}
-        try:
-            tags, probs = tag_audio(panns_model, file)
-
-            if args.threshold == 0. or is_vocal(tags, probs, threshold=args.threshold):
-                if args.debug:
-                    print(file)
-                    for tag, prob in zip(tags, probs):
-                        print(f'{tag}: {prob}')
-                    continue
-                
-                result = whisper.transcribe(whisper_model, file, initial_prompt=args.prompt)
-                result['tags_with_probs'] = [{'tag': tag, 'prob': prob} for tag, prob in zip(tags, probs)]
-                with open(output_file + '.json', 'w') as f:
-                    json.dump(result, f, indent=4, ensure_ascii=False)
-            else:
-                print(f'no vocal in {file}')
-                if args.debug:
-                    for tag, prob in zip(tags, probs):
+        if not os.path.exists(output_file):
+            os.makedirs(os.path.dirname(output_file), exist_ok=True)
+            result = {}
+            try:
+                tags, probs = tag_audio(panns_model, file)
+    
+                if args.threshold == 0. or is_vocal(tags, probs, threshold=args.threshold):
+                    if args.debug:
+                        print(file)
+                        for tag, prob in zip(tags, probs):
                             print(f'{tag}: {prob}')
-
-        except Exception as e:
-            print(e)
-            continue
+                        continue
+                    
+                    result = whisper.transcribe(whisper_model, file, initial_prompt=args.prompt)
+                    result['tags_with_probs'] = [{'tag': tag, 'prob': prob} for tag, prob in zip(tags, probs)]
+                    with open(output_file + '.json', 'w') as f:
+                        json.dump(result, f, indent=4, ensure_ascii=False)
+                else:
+                    print(f'no vocal in {file}')
+                    if args.debug:
+                        for tag, prob in zip(tags, probs):
+                                print(f'{tag}: {prob}')
+    
+            except Exception as e:
+                print(e)
+                continue
         
         
 

@@ -56,7 +56,10 @@ def mp3_read_f32(data: bytes) -> array:
 def mult_analyze(analyzer,q,child_conn):
     # print('a')
     # analyzer,q,child_conn=args
-    analyzer.mp_get_audio_info_youtube(q,child_conn)
+    try:
+        analyzer.mp_get_audio_info_youtube(q,child_conn)
+    except Exception as e: 
+        print(e)
     
 class Transcription_Analyzer:
     
@@ -138,9 +141,12 @@ class Transcription_Analyzer:
     
     def mp_get_audio_info_youtube(self, q, child_conn):
         while not q.empty():
-            print(q.qsize())
-            youtube_id, save_dir, start_time, stop_time, features, info_dl=q.get()
-            self.get_audio_info_youtube(youtube_id, save_dir, start_time, stop_time, features, child_conn, info_dl)
+            try:
+                print(q.qsize())
+                youtube_id, save_dir, start_time, stop_time, features, info_dl=q.get()
+                self.get_audio_info_youtube(youtube_id, save_dir, start_time, stop_time, features, child_conn, info_dl)
+            except Exception as e: 
+                print(e)
         
     
     def get_audio_info_youtube(self, youtube_id, save_dir, start_time, stop_time, features, whisper_pipe, info_transcribe=True):
@@ -337,10 +343,10 @@ class Transcription_Analyzer:
         
 if __name__ == '__main__':
     parser = OptionParser()
-    parser.add_option("--save_loc", dest="save_loc", default='/Users/williamagnew/eclipse-workspace/gen-audio-ethics/')
+    parser.add_option("--save_loc", dest="save_loc", default='/media/willie/1caf5422-4135-4f2c-9619-c44041b51146/audio_data/audioset/audioset_info')
     parser.add_option("--youtube_ids", dest="youtube_ids", default='/media/willie/1caf5422-4135-4f2c-9619-c44041b51146/audio_data/audioset/unbalanced_train_segments.csv')
-    parser.add_option("--num_processes", type="int", dest="num_processes", default=24)
-    parser.add_option("--info_transcribe", type="int", dest="info_transcribe", default=0)
+    parser.add_option("--num_processes", type="int", dest="num_processes", default=10)
+    parser.add_option("--info_transcribe", type="int", dest="info_transcribe", default=1)
     
     (options, args) = parser.parse_args()
     print(options)
@@ -406,6 +412,7 @@ if __name__ == '__main__':
         q = manager.Queue()
         for ind in tqdm(range(len(yt_ids))):
              q.put((yt_ids[ind], options.save_loc, 0, 0, yt_infos_dict[yt_ids[ind]], options.info_transcribe))
+             #analyzer.get_audio_info_youtube(yt_ids[ind], options.save_loc, 0, 0, yt_infos_dict[yt_ids[ind]], (), info_transcribe=True)
         whisper_pipes=[]
         for ind in tqdm(range(options.num_processes)):
             parent_queue=manager.Queue()
@@ -422,11 +429,11 @@ if __name__ == '__main__':
                 if not run.ready():
                     all_done=False
             print(q.qsize())
-            for queues in whisper_pipes:
-                while not queues[0].empty():
-                    audio_file=queues[0].get()
-                    result=whisper_transcriber.transcribe(audio_file)
-                    queues[1].put(result)
+            # for queues in whisper_pipes:
+            #     while not queues[0].empty():
+            #         audio_file=queues[0].get()
+            #         result=whisper_transcriber.transcribe(audio_file)
+            #         queues[1].put(result)
             time.sleep(0.1)
     print("finished!")
     # Single threaded

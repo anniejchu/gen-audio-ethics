@@ -26,12 +26,14 @@ class Clap_Classifier:
         
     def classify(self, audio):
         audio_embed = self.model.get_audio_embedding_from_filelist(x=audio)
-        ranking = torch.argsort(torch.tensor(audio_embed) @ torch.tensor(self.text_embed).t(), descending=True)
-        u=0
+        ranking = torch.argsort(torch.tensor(audio_embed) @ torch.tensor(self.text_embed).t(), descending=True).detach().cpu().numpy()
+        print(ranking)
+        top_class=self.classes[int(ranking[0])]
+        print(top_class)
 
 if __name__ == '__main__':
     classifier=Clap_Classifier()
-    classifier.classify('/media/willie/1caf5422-4135-4f2c-9619-c44041b51146/audio_data/fma_large/000/000002.mp3')
+    classifier.classify('/data/user_data/wagnew/fma_large/000/000002.mp3')
 
 # # Directly get audio embeddings from audio files
 # audio_file = [

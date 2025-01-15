@@ -25,10 +25,10 @@ class Clap_Classifier:
         self.text_embed = self.model.get_text_embedding(all_texts)
         
     def classify(self, audio):
-        audio_embed = self.model.get_audio_embedding_from_filelist(x=audio)
+        audio_embed = self.model.get_audio_embedding_from_filelist(x=[audio])
         ranking = torch.argsort(torch.tensor(audio_embed) @ torch.tensor(self.text_embed).t(), descending=True).detach().cpu().numpy()
         print(ranking)
-        top_class=self.classes[int(ranking[0])]
+        top_class=self.classes[int(ranking[0,0])]
         print(top_class)
 
 if __name__ == '__main__':

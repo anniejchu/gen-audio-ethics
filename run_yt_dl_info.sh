@@ -12,10 +12,9 @@
 
 source ~/.bashrc
 conda activate gen-audio-ethics2
-cd /gscratch/scrubbed/wagnew2/github/gen-audio-ethics
+cd /gscratch/jamiemmt/wagnew2/gen-audio-ethics
 echo "-----------"
-curl https://ipinfo.io/ip
 echo $1
-python transcription_analysis.py --save_loc=/gscratch/scrubbed/wagnew2/audioset_info --youtube_ids=/gscratch/scrubbed/wagnew2/unbalanced_train_segments.csv --num_processes=2 --info_transcribe=1
+python transcription_analysis.py --save_loc=/gscratch/scrubbed/wagnew2/audioset_info --youtube_ids=/gscratch/jamiemmt/wagnew2/gen-audio-ethicsunbalanced_train_segments.csv --num_processes=2 --info_transcribe=1
 
 

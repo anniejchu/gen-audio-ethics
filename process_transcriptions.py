@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-audio_info_file_dir="/gscratch/scrubbed/wagnew2/audioset/audio/unbal_train/"
+audio_info_file_dir="/media/willie/1caf5422-4135-4f2c-9619-c44041b51146/audio_data/audioset/audioset_info/"
 
 audio_infos={}
 num_empty=0
@@ -17,19 +17,19 @@ for audio_info_file in tqdm(os.listdir(audio_info_file_dir)):
             print(f'EOFError {audio_info_file}')
             
         
-        # if isinstance(audio_info, dict):
-        #     audio_infos[audio_info_file[:-4]]=audio_info['yt_info']['uploader']
+        if isinstance(audio_info, dict):
+            audio_infos[audio_info_file[:-4]]=(audio_info['yt_info']['uploader'], audio_info['yt_info']['title'], audio_info['yt_info']['webpage_url'])
 
-        if 'music_info' in audio_info and not audio_info['music_info'] is None and len(audio_info['music_info'])>0:
-            audio_infos[audio_info_file[:-4]]=audio_info
-            print("found music")
-        else:
-            num_empty+=1
+        # if 'music_info' in audio_info and not audio_info['music_info'] is None and len(audio_info['music_info'])>0:
+        #     audio_infos[audio_info_file[:-4]]=audio_info
+        #     print("found music")
+        # else:
+        #     num_empty+=1
             #transcription=audio_info['transcript']
     # if len(audio_infos)>10000:
     #     break
 print('num_empty', num_empty)   
-pickle.dump(audio_infos, open("/gscratch/scrubbed/wagnew2/audioset_info_collated.lz4", 'wb'))
+pickle.dump(audio_infos, open("/media/willie/1caf5422-4135-4f2c-9619-c44041b51146/audio_data/audioset/audioset_info_collated.lz4", 'wb'))
             
 # Date
 
@@ -69,15 +69,15 @@ pickle.dump(audio_infos, open("/gscratch/scrubbed/wagnew2/audioset_info_collated
 
 # Music IDed, Artist name, label name
 
-creator_names=[]
-for audio_info in audio_infos:
-    if not audio_info['music_info'] is None and len(audio_info['music_info'])>0:
-        u=0
-    audio_tags=audio_info['audio_tags']
-    for audio_tag in audio_tags:
-        audio_tagss.append(audio_tag[0])
-plt.hist(audio_tagss, bins=range(len(set(audio_tagss))), align="left")
-plt.xlabel('Audio Tag')
-plt.ylabel('Number Audio Files')
-plt.title('Audio Tags')
-plt.show()
+# creator_names=[]
+# for audio_info in audio_infos:
+#     if not audio_info['music_info'] is None and len(audio_info['music_info'])>0:
+#         u=0
+#     audio_tags=audio_info['audio_tags']
+#     for audio_tag in audio_tags:
+#         audio_tagss.append(audio_tag[0])
+# plt.hist(audio_tagss, bins=range(len(set(audio_tagss))), align="left")
+# plt.xlabel('Audio Tag')
+# plt.ylabel('Number Audio Files')
+# plt.title('Audio Tags')
+# plt.show()

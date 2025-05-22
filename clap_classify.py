@@ -3,6 +3,8 @@ import librosa
 import torch
 import laion_clap
 import json
+import random
+from tqdm import tqdm
 
 # quantization
 def int16_to_float32(x):
@@ -24,14 +26,59 @@ class Clap_Classifier:
         all_texts = ["This is a sound of " + t for t in self.classes]
         self.text_embed = self.model.get_text_embedding(all_texts)
         
-    def classify(self, audio):
-        audio_embed = self.model.get_audio_embedding_from_filelist(x=[audio])
-        ranking = torch.argsort(torch.tensor(audio_embed) @ torch.tensor(self.text_embed).t(), descending=True).detach().cpu().numpy()
-        print(ranking)
-        top_class=self.classes[int(ranking[0,0])]
+    def classify(self, audio_files):
+        chunk_size=10
+        classes=[]
+        for chunk_ind in tqdm(range(0, len(audio_files), chunk_size)):
+            audio_embed = self.model.get_audio_embedding_from_filelist(x=[audio])
+            similarities=torch.tensor(audio_embed) @ torch.tensor(self.text_embed).t()
+            sort_similarities=torch.sort(similarities, descending=True).detach().cpu().numpy()
+            ranking = torch.argsort(similarities, descending=True).detach().cpu().numpy()
+            for file_ind in range(sort_similarities.shape[0]):
+                classes.append([])
+                for sim_ind in range(sort_similarities.shape[1]):
+                    if sort_similarities[file_ind, sim_ind]<0.9:
+                        break
+                    classes[-1].append(self.classes[int(ranking[file_ind, sim_ind])])
+                    
+            # print(ranking)
+            # top_class=self.classes[int(ranking[0,0])]
         print(top_class)
 
+def get_audio_files(dir):
+    audio_files=[]
+    for file in os.listdir(dir):
+        if os.path.isdir(file):
+            audio_files+=get_audio_files(os.path.join(dir, file))
+        elif file[-4:] in ['.mp3', '.wav', 'flac']:
+            audio_files.append(os.path.join(dir, file))
+    return audio_files
+        
+
 if __name__ == '__main__':
+    #MCV
+    #speaker
+    
+    #VCTK
+    #speaker
+    
+    #Librivox
+    #speaker
+    
+    #Lakh
+    #genre labels
+    
+    #Audioset
+    #labels
+    
+    #FMA
+    #genre labels
+    audio_files=get_audio_files('/data/user_data/wagnew/fma_large/')
+    audio_files=random.shuffle(audio_files)
+    
+    #Jamendo
+    #genre labels
+    
     classifier=Clap_Classifier()
     classifier.classify('/data/user_data/wagnew/fma_large/000/000002.mp3')
 
